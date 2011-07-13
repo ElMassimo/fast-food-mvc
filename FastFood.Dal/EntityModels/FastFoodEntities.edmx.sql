@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/12/2011 21:56:34
+-- Date Created: 07/13/2011 01:47:37
 -- Generated from EDMX file: C:\Users\MM\Documents\Visual Studio 2010\Projects\FastFood\FastFood.Dal\EntityModels\FastFoodEntities.edmx
 -- --------------------------------------------------
 
@@ -65,6 +65,7 @@ CREATE TABLE [dbo].[Orders] (
     [DateDelivered] datetime  NULL,
     [Status] smallint  NOT NULL,
     [Cost] decimal(18,0)  NOT NULL,
+    [ClientId] int  NOT NULL,
     [DeliveryBoy_Id] int  NOT NULL
 );
 GO
@@ -77,7 +78,6 @@ CREATE TABLE [dbo].[Clients] (
     [Phone] nvarchar(max)  NULL,
     [Email] nvarchar(max)  NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [Orders_Id] int  NOT NULL,
     [Address_Id] int  NOT NULL
 );
 GO
@@ -89,9 +89,9 @@ CREATE TABLE [dbo].[Addresses] (
     [City] nvarchar(max)  NOT NULL,
     [State] nvarchar(max)  NOT NULL,
     [Country] nvarchar(max)  NOT NULL,
-    [PostalCode] int  NULL,
+    [PostalCode] int  NOT NULL,
     [Number] smallint  NOT NULL,
-    [ApartmentNumber] smallint  NULL
+    [ApartmentNumber] smallint  NOT NULL
 );
 GO
 
@@ -102,7 +102,7 @@ CREATE TABLE [dbo].[DeliveryBoys] (
     [LastName] nvarchar(max)  NOT NULL,
     [SuccesfulDeliveries] int  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [UserName] nvarchar(max)  NOT NULL,
+    [Nick] nvarchar(max)  NOT NULL,
     [Branch_Id] int  NOT NULL
 );
 GO
@@ -152,20 +152,6 @@ GO
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [Orders_Id] in table 'Clients'
-ALTER TABLE [dbo].[Clients]
-ADD CONSTRAINT [FK_OrderClient]
-    FOREIGN KEY ([Orders_Id])
-    REFERENCES [dbo].[Orders]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OrderClient'
-CREATE INDEX [IX_FK_OrderClient]
-ON [dbo].[Clients]
-    ([Orders_Id]);
-GO
 
 -- Creating foreign key on [Address_Id] in table 'Clients'
 ALTER TABLE [dbo].[Clients]
@@ -221,6 +207,20 @@ ADD CONSTRAINT [FK_DeliveryBoyBranch]
 CREATE INDEX [IX_FK_DeliveryBoyBranch]
 ON [dbo].[DeliveryBoys]
     ([Branch_Id]);
+GO
+
+-- Creating foreign key on [ClientId] in table 'Orders'
+ALTER TABLE [dbo].[Orders]
+ADD CONSTRAINT [FK_ClientOrders]
+    FOREIGN KEY ([ClientId])
+    REFERENCES [dbo].[Clients]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClientOrders'
+CREATE INDEX [IX_FK_ClientOrders]
+ON [dbo].[Orders]
+    ([ClientId]);
 GO
 
 -- --------------------------------------------------

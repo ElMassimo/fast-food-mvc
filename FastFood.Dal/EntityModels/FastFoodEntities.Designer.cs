@@ -18,11 +18,11 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("FastFoodEntities", "OrderClient", "Order", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(FastFood.Dal.EntityModels.Order), "Client", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(FastFood.Dal.EntityModels.Client))]
 [assembly: EdmRelationshipAttribute("FastFoodEntities", "ClientAddress", "Client", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(FastFood.Dal.EntityModels.Client), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(FastFood.Dal.EntityModels.Address))]
 [assembly: EdmRelationshipAttribute("FastFoodEntities", "OrderDeliveryBoy", "Order", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(FastFood.Dal.EntityModels.Order), "DeliveryBoy", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(FastFood.Dal.EntityModels.DeliveryBoy))]
 [assembly: EdmRelationshipAttribute("FastFoodEntities", "BranchAddress", "Branch", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(FastFood.Dal.EntityModels.Branch), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(FastFood.Dal.EntityModels.Address))]
 [assembly: EdmRelationshipAttribute("FastFoodEntities", "DeliveryBoyBranch", "DeliveryBoy", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(FastFood.Dal.EntityModels.DeliveryBoy), "Branch", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(FastFood.Dal.EntityModels.Branch))]
+[assembly: EdmRelationshipAttribute("FastFoodEntities", "ClientOrders", "Client", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(FastFood.Dal.EntityModels.Client), "Order", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(FastFood.Dal.EntityModels.Order), true)]
 
 #endregion
 
@@ -359,9 +359,9 @@ namespace FastFood.Dal.EntityModels
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> PostalCode
+        public global::System.Int32 PostalCode
         {
             get
             {
@@ -376,8 +376,8 @@ namespace FastFood.Dal.EntityModels
                 OnPostalCodeChanged();
             }
         }
-        private Nullable<global::System.Int32> _PostalCode = 11200;
-        partial void OnPostalCodeChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _PostalCode = 11200;
+        partial void OnPostalCodeChanging(global::System.Int32 value);
         partial void OnPostalCodeChanged();
     
         /// <summary>
@@ -407,9 +407,9 @@ namespace FastFood.Dal.EntityModels
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> ApartmentNumber
+        public global::System.Int16 ApartmentNumber
         {
             get
             {
@@ -424,8 +424,8 @@ namespace FastFood.Dal.EntityModels
                 OnApartmentNumberChanged();
             }
         }
-        private Nullable<global::System.Int16> _ApartmentNumber;
-        partial void OnApartmentNumberChanging(Nullable<global::System.Int16> value);
+        private global::System.Int16 _ApartmentNumber = 0;
+        partial void OnApartmentNumberChanging(global::System.Int16 value);
         partial void OnApartmentNumberChanged();
 
         #endregion
@@ -810,44 +810,6 @@ namespace FastFood.Dal.EntityModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("FastFoodEntities", "OrderClient", "Order")]
-        public Order Orders
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Order>("FastFoodEntities.OrderClient", "Order").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Order>("FastFoodEntities.OrderClient", "Order").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Order> OrdersReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Order>("FastFoodEntities.OrderClient", "Order");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Order>("FastFoodEntities.OrderClient", "Order", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("FastFoodEntities", "ClientAddress", "Address")]
         public Address Address
         {
@@ -876,6 +838,28 @@ namespace FastFood.Dal.EntityModels
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Address>("FastFoodEntities.ClientAddress", "Address", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("FastFoodEntities", "ClientOrders", "Order")]
+        public EntityCollection<Order> Orders
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Order>("FastFoodEntities.ClientOrders", "Order");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Order>("FastFoodEntities.ClientOrders", "Order", value);
                 }
             }
         }
@@ -1149,7 +1133,8 @@ namespace FastFood.Dal.EntityModels
         /// <param name="dateOrdered">Initial value of the DateOrdered property.</param>
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="cost">Initial value of the Cost property.</param>
-        public static Order CreateOrder(global::System.Int32 id, global::System.String description, global::System.DateTime dateOrdered, global::System.Int16 status, global::System.Decimal cost)
+        /// <param name="clientId">Initial value of the ClientId property.</param>
+        public static Order CreateOrder(global::System.Int32 id, global::System.String description, global::System.DateTime dateOrdered, global::System.Int16 status, global::System.Decimal cost, global::System.Int32 clientId)
         {
             Order order = new Order();
             order.Id = id;
@@ -1157,6 +1142,7 @@ namespace FastFood.Dal.EntityModels
             order.DateOrdered = dateOrdered;
             order.Status = status;
             order.Cost = cost;
+            order.ClientId = clientId;
             return order;
         }
 
@@ -1309,32 +1295,34 @@ namespace FastFood.Dal.EntityModels
         private global::System.Decimal _Cost;
         partial void OnCostChanging(global::System.Decimal value);
         partial void OnCostChanged();
-
-        #endregion
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("FastFoodEntities", "OrderClient", "Client")]
-        public EntityCollection<Client> Client
+        public global::System.Int32 ClientId
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Client>("FastFoodEntities.OrderClient", "Client");
+                return _ClientId;
             }
             set
             {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Client>("FastFoodEntities.OrderClient", "Client", value);
-                }
+                OnClientIdChanging(value);
+                ReportPropertyChanging("ClientId");
+                _ClientId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClientId");
+                OnClientIdChanged();
             }
         }
+        private global::System.Int32 _ClientId;
+        partial void OnClientIdChanging(global::System.Int32 value);
+        partial void OnClientIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1370,6 +1358,44 @@ namespace FastFood.Dal.EntityModels
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DeliveryBoy>("FastFoodEntities.OrderDeliveryBoy", "DeliveryBoy", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("FastFoodEntities", "ClientOrders", "Client")]
+        public Client Client
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Client>("FastFoodEntities.ClientOrders", "Client").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Client>("FastFoodEntities.ClientOrders", "Client").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Client> ClientReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Client>("FastFoodEntities.ClientOrders", "Client");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Client>("FastFoodEntities.ClientOrders", "Client", value);
                 }
             }
         }
