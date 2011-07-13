@@ -40,8 +40,8 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateOrdered" Type="datetime" Nullable="false" />
     <Property Name="DateDelivered" Type="datetime" Nullable="true" />
-    <Property Name="Status" Type="nchar" Nullable="false" DefaultValue="N" MaxLength="1" />
-    <Property Name="Cost" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+    <Property Name="Cost" Type="decimal" Nullable="false" />
     <Property Name="DeliveryBoy_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Clients">
@@ -79,6 +79,7 @@
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SuccesfulDeliveries" Type="int" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Branch_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Branchs">
@@ -189,9 +190,9 @@
           <Property Type="DateTime" Name="DateOrdered" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="FastFoodEntities.OrderClient" FromRole="Order" ToRole="Client" />
           <Property Type="DateTime" Name="DateDelivered" Nullable="true" />
-          <Property Type="String" Name="Status" Nullable="false" FixedLength="true" MaxLength="1" DefaultValue="N" />
+          <Property Type="Int16" Name="Status" Nullable="false" />
           <NavigationProperty Name="DeliveryBoy" Relationship="FastFoodEntities.OrderDeliveryBoy" FromRole="Order" ToRole="DeliveryBoy" />
-          <Property Type="String" Name="Cost" Nullable="false" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -240,6 +241,7 @@
           <NavigationProperty Name="Orders" Relationship="FastFoodEntities.OrderDeliveryBoy" FromRole="DeliveryBoy" ToRole="Order" />
           <NavigationProperty Name="Branch" Relationship="FastFoodEntities.DeliveryBoyBranch" FromRole="DeliveryBoy" ToRole="Branch" />
           <Property Type="String" Name="Password" Nullable="false" FixedLength="false" />
+          <Property Type="String" Name="UserName" Nullable="false" />
         </EntityType>
         <Association Name="OrderDeliveryBoy">
           <End Type="FastFoodEntities.Order" Role="Order" Multiplicity="*" />
@@ -314,6 +316,7 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="SuccesfulDeliveries" ColumnName="SuccesfulDeliveries" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -378,7 +381,7 @@
     <edmx:Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
       </DesignerInfoPropertySet>
     </edmx:Options>
@@ -396,7 +399,7 @@
           <ConnectorPoint PointX="6.875" PointY="5.4321907552083326" />
           <ConnectorPoint PointX="6.875" PointY="6.5" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="FastFoodEntities.DeliveryBoy" Width="1.75" PointX="1.125" PointY="4.875" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="FastFoodEntities.DeliveryBoy" Width="1.75" PointX="1.125" PointY="4.875" Height="2.5571907552083326" />
         <AssociationConnector Association="FastFoodEntities.OrderDeliveryBoy">
           <ConnectorPoint PointX="3.625" PointY="5.1535953776041659" />
           <ConnectorPoint PointX="2.875" PointY="5.1535953776041659" />
@@ -407,8 +410,8 @@
           <ConnectorPoint PointX="6" PointY="7.3939925130208328" />
         </AssociationConnector>
         <AssociationConnector Association="FastFoodEntities.DeliveryBoyBranch">
-          <ConnectorPoint PointX="2.875" PointY="6.8699446614583328" />
-          <ConnectorPoint PointX="3.625" PointY="6.8699446614583328" />
+          <ConnectorPoint PointX="2.875" PointY="6.9660953776041659" />
+          <ConnectorPoint PointX="3.625" PointY="6.9660953776041659" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

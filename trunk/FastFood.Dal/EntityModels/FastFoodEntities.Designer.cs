@@ -901,7 +901,8 @@ namespace FastFood.Dal.EntityModels
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="succesfulDeliveries">Initial value of the SuccesfulDeliveries property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        public static DeliveryBoy CreateDeliveryBoy(global::System.Int32 id, global::System.String firstName, global::System.String lastName, global::System.Int32 succesfulDeliveries, global::System.String password)
+        /// <param name="userName">Initial value of the UserName property.</param>
+        public static DeliveryBoy CreateDeliveryBoy(global::System.Int32 id, global::System.String firstName, global::System.String lastName, global::System.Int32 succesfulDeliveries, global::System.String password, global::System.String userName)
         {
             DeliveryBoy deliveryBoy = new DeliveryBoy();
             deliveryBoy.Id = id;
@@ -909,6 +910,7 @@ namespace FastFood.Dal.EntityModels
             deliveryBoy.LastName = lastName;
             deliveryBoy.SuccesfulDeliveries = succesfulDeliveries;
             deliveryBoy.Password = password;
+            deliveryBoy.UserName = userName;
             return deliveryBoy;
         }
 
@@ -1037,6 +1039,30 @@ namespace FastFood.Dal.EntityModels
         private global::System.String _Password;
         partial void OnPasswordChanging(global::System.String value);
         partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
 
         #endregion
     
@@ -1121,13 +1147,15 @@ namespace FastFood.Dal.EntityModels
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="dateOrdered">Initial value of the DateOrdered property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
         /// <param name="cost">Initial value of the Cost property.</param>
-        public static Order CreateOrder(global::System.Int32 id, global::System.String description, global::System.DateTime dateOrdered, global::System.String cost)
+        public static Order CreateOrder(global::System.Int32 id, global::System.String description, global::System.DateTime dateOrdered, global::System.Int16 status, global::System.Decimal cost)
         {
             Order order = new Order();
             order.Id = id;
             order.Description = description;
             order.DateOrdered = dateOrdered;
+            order.Status = status;
             order.Cost = cost;
             return order;
         }
@@ -1239,7 +1267,7 @@ namespace FastFood.Dal.EntityModels
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Status
+        public global::System.Int16 Status
         {
             get
             {
@@ -1249,13 +1277,13 @@ namespace FastFood.Dal.EntityModels
             {
                 OnStatusChanging(value);
                 ReportPropertyChanging("Status");
-                _Status = StructuralObject.SetValidValue(value, false);
+                _Status = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Status");
                 OnStatusChanged();
             }
         }
-        private global::System.String _Status = "N";
-        partial void OnStatusChanging(global::System.String value);
+        private global::System.Int16 _Status;
+        partial void OnStatusChanging(global::System.Int16 value);
         partial void OnStatusChanged();
     
         /// <summary>
@@ -1263,7 +1291,7 @@ namespace FastFood.Dal.EntityModels
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Cost
+        public global::System.Decimal Cost
         {
             get
             {
@@ -1273,13 +1301,13 @@ namespace FastFood.Dal.EntityModels
             {
                 OnCostChanging(value);
                 ReportPropertyChanging("Cost");
-                _Cost = StructuralObject.SetValidValue(value, false);
+                _Cost = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Cost");
                 OnCostChanged();
             }
         }
-        private global::System.String _Cost;
-        partial void OnCostChanging(global::System.String value);
+        private global::System.Decimal _Cost;
+        partial void OnCostChanging(global::System.Decimal value);
         partial void OnCostChanged();
 
         #endregion
