@@ -11,10 +11,6 @@
     <EntitySet Name="Addresses" EntityType="FastFoodEntities.Store.Addresses" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DeliveryBoys" EntityType="FastFoodEntities.Store.DeliveryBoys" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Branchs" EntityType="FastFoodEntities.Store.Branchs" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="OrderClient" Association="FastFoodEntities.Store.OrderClient">
-      <End Role="Order" EntitySet="Orders" />
-      <End Role="Client" EntitySet="Clients" />
-    </AssociationSet>
     <AssociationSet Name="ClientAddress" Association="FastFoodEntities.Store.ClientAddress">
       <End Role="Client" EntitySet="Clients" />
       <End Role="Address" EntitySet="Addresses" />
@@ -31,6 +27,10 @@
       <End Role="DeliveryBoy" EntitySet="DeliveryBoys" />
       <End Role="Branch" EntitySet="Branchs" />
     </AssociationSet>
+    <AssociationSet Name="ClientOrders" Association="FastFoodEntities.Store.ClientOrders">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Orders">
     <Key>
@@ -42,6 +42,7 @@
     <Property Name="DateDelivered" Type="datetime" Nullable="true" />
     <Property Name="Status" Type="smallint" Nullable="false" />
     <Property Name="Cost" Type="decimal" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="DeliveryBoy_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Clients">
@@ -54,7 +55,6 @@
     <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Orders_Id" Type="int" Nullable="false" />
     <Property Name="Address_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Addresses">
@@ -66,9 +66,9 @@
     <Property Name="City" Type="nvarchar(max)" Nullable="false" DefaultValue="Montevideo" />
     <Property Name="State" Type="nvarchar(max)" Nullable="false" DefaultValue="Montevideo" />
     <Property Name="Country" Type="nvarchar(max)" Nullable="false" DefaultValue="Uruguay" />
-    <Property Name="PostalCode" Type="int" Nullable="true" DefaultValue="11200" />
+    <Property Name="PostalCode" Type="int" Nullable="false" DefaultValue="11200" />
     <Property Name="Number" Type="smallint" Nullable="false" />
-    <Property Name="ApartmentNumber" Type="smallint" Nullable="true" />
+    <Property Name="ApartmentNumber" Type="smallint" Nullable="false" DefaultValue="0" />
   </EntityType>
   <EntityType Name="DeliveryBoys">
     <Key>
@@ -79,7 +79,7 @@
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SuccesfulDeliveries" Type="int" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nick" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Branch_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Branchs">
@@ -90,18 +90,6 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Address_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="OrderClient">
-    <End Role="Order" Type="FastFoodEntities.Store.Orders" Multiplicity="1" />
-    <End Role="Client" Type="FastFoodEntities.Store.Clients" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Client">
-        <PropertyRef Name="Orders_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ClientAddress">
     <End Role="Client" Type="FastFoodEntities.Store.Clients" Multiplicity="*" />
     <End Role="Address" Type="FastFoodEntities.Store.Addresses" Multiplicity="1" />
@@ -150,6 +138,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ClientOrders">
+    <End Role="Client" Type="FastFoodEntities.Store.Clients" Multiplicity="1" />
+    <End Role="Order" Type="FastFoodEntities.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -158,10 +158,6 @@
           <EntitySet Name="Orders" EntityType="FastFoodEntities.Order" />
           <EntitySet Name="Clients" EntityType="FastFoodEntities.Client" />
           <EntitySet Name="Addresses" EntityType="FastFoodEntities.Address" />
-          <AssociationSet Name="OrderClient" Association="FastFoodEntities.OrderClient">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="Client" EntitySet="Clients" />
-          </AssociationSet>
           <AssociationSet Name="ClientAddress" Association="FastFoodEntities.ClientAddress">
             <End Role="Client" EntitySet="Clients" />
             <End Role="Address" EntitySet="Addresses" />
@@ -180,6 +176,10 @@
             <End Role="DeliveryBoy" EntitySet="DeliveryBoys" />
             <End Role="Branch" EntitySet="Branchs" />
           </AssociationSet>
+          <AssociationSet Name="ClientOrders" Association="FastFoodEntities.ClientOrders">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Order">
           <Key>
@@ -188,11 +188,12 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Description" Nullable="false" FixedLength="false" />
           <Property Type="DateTime" Name="DateOrdered" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="FastFoodEntities.OrderClient" FromRole="Order" ToRole="Client" />
           <Property Type="DateTime" Name="DateDelivered" Nullable="true" />
           <Property Type="Int16" Name="Status" Nullable="false" />
           <NavigationProperty Name="DeliveryBoy" Relationship="FastFoodEntities.OrderDeliveryBoy" FromRole="Order" ToRole="DeliveryBoy" />
           <Property Type="Decimal" Name="Cost" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="FastFoodEntities.ClientOrders" FromRole="Order" ToRole="Client" />
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -201,11 +202,11 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="FirstName" Nullable="false" FixedLength="false" />
           <Property Type="String" Name="LastName" Nullable="false" FixedLength="false" />
-          <NavigationProperty Name="Orders" Relationship="FastFoodEntities.OrderClient" FromRole="Client" ToRole="Order" />
           <NavigationProperty Name="Address" Relationship="FastFoodEntities.ClientAddress" FromRole="Client" ToRole="Address" />
           <Property Type="String" Name="Phone" Nullable="true" FixedLength="false" />
           <Property Type="String" Name="Email" Nullable="true" FixedLength="false" />
           <Property Type="String" Name="Password" Nullable="false" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="FastFoodEntities.ClientOrders" FromRole="Client" ToRole="Order" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
@@ -217,15 +218,11 @@
           <Property Type="String" Name="City" Nullable="false" DefaultValue="Montevideo" FixedLength="false" />
           <Property Type="String" Name="State" Nullable="false" FixedLength="false" DefaultValue="Montevideo" />
           <Property Type="String" Name="Country" Nullable="false" FixedLength="false" DefaultValue="Uruguay" />
-          <Property Type="Int32" Name="PostalCode" Nullable="true" DefaultValue="11200" />
+          <Property Type="Int32" Name="PostalCode" Nullable="false" DefaultValue="11200" />
           <Property Type="Int16" Name="Number" Nullable="false" />
-          <Property Type="Int16" Name="ApartmentNumber" Nullable="true" />
+          <Property Type="Int16" Name="ApartmentNumber" Nullable="false" DefaultValue="0" />
           <NavigationProperty Name="Branches" Relationship="FastFoodEntities.BranchAddress" FromRole="Address" ToRole="Branch" />
         </EntityType>
-        <Association Name="OrderClient">
-          <End Type="FastFoodEntities.Order" Role="Order" Multiplicity="1" />
-          <End Type="FastFoodEntities.Client" Role="Client" Multiplicity="*" />
-        </Association>
         <Association Name="ClientAddress">
           <End Type="FastFoodEntities.Client" Role="Client" Multiplicity="*" />
           <End Type="FastFoodEntities.Address" Role="Address" Multiplicity="1" />
@@ -264,6 +261,18 @@
           <End Type="FastFoodEntities.DeliveryBoy" Role="DeliveryBoy" Multiplicity="*" />
           <End Type="FastFoodEntities.Branch" Role="Branch" Multiplicity="1" />
         </Association>
+        <Association Name="ClientOrders">
+          <End Type="FastFoodEntities.Client" Role="Client" Multiplicity="1" />
+          <End Type="FastFoodEntities.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -279,6 +288,7 @@
           <ScalarProperty Name="DateDelivered" ColumnName="DateDelivered" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -316,7 +326,7 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="SuccesfulDeliveries" ColumnName="SuccesfulDeliveries" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Nick" ColumnName="UserName" />
+          <ScalarProperty Name="Nick" ColumnName="Nick" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -328,14 +338,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="OrderClient" TypeName="FastFoodEntities.OrderClient" StoreEntitySet="Clients">
-      <EndProperty Name="Order">
-        <ScalarProperty Name="Id" ColumnName="Orders_Id" />
-      </EndProperty>
-      <EndProperty Name="Client">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="ClientAddress" TypeName="FastFoodEntities.ClientAddress" StoreEntitySet="Clients">
       <EndProperty Name="Address">
         <ScalarProperty Name="Id" ColumnName="Address_Id" />
@@ -391,10 +393,6 @@
         <EntityTypeShape EntityType="FastFoodEntities.Order" Width="1.5" PointX="3.625" PointY="2.875" Height="2.5571907552083326" />
         <EntityTypeShape EntityType="FastFoodEntities.Client" Width="1.5" PointX="6.125" PointY="2.875" Height="2.5571907552083326" />
         <EntityTypeShape EntityType="FastFoodEntities.Address" Width="1.625" PointX="6" PointY="6.5" Height="2.9417936197916656" />
-        <AssociationConnector Association="FastFoodEntities.OrderClient">
-          <ConnectorPoint PointX="5.125" PointY="4.1535953776041659" />
-          <ConnectorPoint PointX="6.125" PointY="4.1535953776041659" />
-        </AssociationConnector>
         <AssociationConnector Association="FastFoodEntities.ClientAddress">
           <ConnectorPoint PointX="6.875" PointY="5.4321907552083326" />
           <ConnectorPoint PointX="6.875" PointY="6.5" />
@@ -412,6 +410,10 @@
         <AssociationConnector Association="FastFoodEntities.DeliveryBoyBranch">
           <ConnectorPoint PointX="2.875" PointY="6.9660953776041659" />
           <ConnectorPoint PointX="3.625" PointY="6.9660953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="FastFoodEntities.ClientOrders">
+          <ConnectorPoint PointX="6.125" PointY="4.1535953776041659" />
+          <ConnectorPoint PointX="5.125" PointY="4.1535953776041659" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
