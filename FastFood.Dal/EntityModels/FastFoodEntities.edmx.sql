@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/12/2011 19:26:36
--- Generated from EDMX file: c:\users\mm\documents\visual studio 2010\Projects\FastFood\FastFood.Dal\EntityModels\FastFoodEntities.edmx
+-- Date Created: 07/12/2011 21:56:34
+-- Generated from EDMX file: C:\Users\MM\Documents\Visual Studio 2010\Projects\FastFood\FastFood.Dal\EntityModels\FastFoodEntities.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -63,8 +63,8 @@ CREATE TABLE [dbo].[Orders] (
     [Description] nvarchar(max)  NOT NULL,
     [DateOrdered] datetime  NOT NULL,
     [DateDelivered] datetime  NULL,
-    [Status] nchar(1)  NOT NULL,
-    [Cost] nvarchar(max)  NOT NULL,
+    [Status] smallint  NOT NULL,
+    [Cost] decimal(18,0)  NOT NULL,
     [DeliveryBoy_Id] int  NOT NULL
 );
 GO
@@ -102,6 +102,7 @@ CREATE TABLE [dbo].[DeliveryBoys] (
     [LastName] nvarchar(max)  NOT NULL,
     [SuccesfulDeliveries] int  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
+    [UserName] nvarchar(max)  NOT NULL,
     [Branch_Id] int  NOT NULL
 );
 GO
