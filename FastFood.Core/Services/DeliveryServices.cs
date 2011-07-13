@@ -10,73 +10,64 @@ namespace FastFood.Core.Services
 {
     public interface IDeliveryServices : IServices<DeliveryBoyModel>
     {
-
+        DeliveryBoyModel GetDeliveryBoy(string nick);
     }
 
-    public class DeliveryServices : IDeliveryServices
+    public class DeliveryServices : BaseServices<DeliveryBoy, DeliveryBoyModel>, IDeliveryServices
     {
         #region Constructors / Repositories
+
         public DeliveryServices()
-            : this(new OrderRepository(), new ClientRepository(), new DeliveryBoyRepository(), new BranchRepository(), new AddressRepository())
+            : this(new OrderRepository(), new DeliveryBoyRepository(), new DeliveryBoyRepository(), new BranchRepository(), new AddressRepository())
         {
         }
 
-        public DeliveryServices(IOrderRepository orderRepo, IClientRepository clientRepo, IDeliveryBoyRepository deliveryRepo, IBranchRepository branchRepo, IAddressRepository addressRepo)
+        public DeliveryServices(IOrderRepository orderRepo, IDeliveryBoyRepository clientRepo, IDeliveryBoyRepository deliveryRepo, IBranchRepository branchRepo, IAddressRepository addressRepo)
+            : base(deliveryRepo)
         {
             _orderRepo = orderRepo;
             _clientRepo = clientRepo;
-            _deliveryRepo = deliveryRepo;
             _branchRepo = branchRepo;
             _addressRepo = addressRepo;
         }
 
         private IOrderRepository _orderRepo;
-        private IClientRepository _clientRepo;
-        private IDeliveryBoyRepository _deliveryRepo;
+        private IDeliveryBoyRepository _clientRepo;
         private IBranchRepository _branchRepo;
         private IAddressRepository _addressRepo;
+
         #endregion
 
-        #region Mappers
-        private void CreateMapToModel()
-        {
-            AutoMapper.Mapper.CreateMap<DeliveryBoy, DeliveryBoyModel>();
-        }
+        #region IServices<DeliveryBoy>
 
-        private void CreateMapToEntities()
-        {
-            AutoMapper.Mapper.CreateMap<DeliveryBoyModel, DeliveryBoy>();
-        }
-        #endregion
-            
         public void Add(DeliveryBoyModel model)
         {
- 	        throw new NotImplementedException();
+            DeliveryBoy deliveryBoy = MappingServices.Current.DeliveryBoyToEntity(model);
+            deliveryBoy.Branch = MappingServices.Current.BranchToEntity(model.Branch);
+            _mainRepo.Add(deliveryBoy);
+            _mainRepo.Save();
         }
 
         public void Delete(DeliveryBoyModel model)
         {
- 	        throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Update(DeliveryBoyModel model)
         {
- 	        throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public DeliveryBoyModel GetSingle(System.Linq.Expressions.Expression<Func<DeliveryBoyModel,bool>> whereCondition)
+        #endregion
+
+        #region IDeliveryBoyServices
+
+        public DeliveryBoyModel GetDeliveryBoy(string nick)
         {
- 	        throw new NotImplementedException();
+            DeliveryBoy deliveryBoy = _mainRepo.GetSingle(d => d.Nick == nick);
+            return MappingServices.Current.DeliveryBoyToModel(deliveryBoy);
         }
 
-        public IList<DeliveryBoyModel> GetAll()
-        {
- 	        throw new NotImplementedException();
-        }
-
-        public IQueryable<DeliveryBoyModel> Query(System.Linq.Expressions.Expression<Func<DeliveryBoyModel,bool>> whereCondition)
-        {
- 	        throw new NotImplementedException();
-        }
+        #endregion
     }
 }

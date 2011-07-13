@@ -22,9 +22,9 @@ namespace FastFood.Core.Security
         }
         #endregion
 
-        public bool ValidateUser(string user, string pass)
+        public bool ValidateUser(string nick, string pass)
         {            
-            DeliveryBoyModel deliveryBoy = _deliveryServices.GetSingle(d => d.UserName == user);
+            DeliveryBoyModel deliveryBoy = _deliveryServices.GetDeliveryBoy(nick);
 
             if (deliveryBoy == null)
                 return false;
@@ -32,9 +32,9 @@ namespace FastFood.Core.Security
             return deliveryBoy.Password == pass;
         }
 
-        public bool ChangePassword(string oldpass, string newpass, string user)
+        public bool ChangePassword(string oldpass, string newpass, string nick)
         {
-            DeliveryBoyModel deliveryBoy = _deliveryServices.GetSingle(d => d.UserName == user);
+            DeliveryBoyModel deliveryBoy = _deliveryServices.GetDeliveryBoy(nick);
             
             if(deliveryBoy == null && deliveryBoy.Password == oldpass)
             {
