@@ -241,7 +241,7 @@
           <NavigationProperty Name="Orders" Relationship="FastFoodEntities.OrderDeliveryBoy" FromRole="DeliveryBoy" ToRole="Order" />
           <NavigationProperty Name="Branch" Relationship="FastFoodEntities.DeliveryBoyBranch" FromRole="DeliveryBoy" ToRole="Branch" />
           <Property Type="String" Name="Password" Nullable="false" FixedLength="false" />
-          <Property Type="String" Name="UserName" Nullable="false" />
+          <Property Type="String" Name="Nick" Nullable="false" />
         </EntityType>
         <Association Name="OrderDeliveryBoy">
           <End Type="FastFoodEntities.Order" Role="Order" Multiplicity="*" />
@@ -254,7 +254,7 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="FastFoodEntities.BranchAddress" FromRole="Branch" ToRole="Address" />
-          <NavigationProperty Name="DeliveryBoy" Relationship="FastFoodEntities.DeliveryBoyBranch" FromRole="Branch" ToRole="DeliveryBoy" />
+          <NavigationProperty Name="DeliveryBoys" Relationship="FastFoodEntities.DeliveryBoyBranch" FromRole="Branch" ToRole="DeliveryBoy" />
         </EntityType>
         <Association Name="BranchAddress">
           <End Type="FastFoodEntities.Branch" Role="Branch" Multiplicity="*" />
@@ -316,7 +316,7 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="SuccesfulDeliveries" ColumnName="SuccesfulDeliveries" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Nick" ColumnName="UserName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

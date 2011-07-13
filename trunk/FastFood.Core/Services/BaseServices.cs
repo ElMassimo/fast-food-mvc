@@ -7,7 +7,7 @@ using AutoMapper;
 
 namespace FastFood.Core.Services
 {
-    public abstract class BaseServices<E, M> : IServices<M>
+    public abstract class BaseServices<E, M>
     {
         protected IRepository<E> _mainRepo;
         

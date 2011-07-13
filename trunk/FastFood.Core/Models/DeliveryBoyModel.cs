@@ -26,5 +26,8 @@ namespace FastFood.Core.Models
         public string Password { get; set; }
 
         public int SuccesfulDeliveries { get; set; }
+
+        public BranchModel Branch { get; set; }
+        public IList<OrderModel> Orders { get; set; }
     }
 }

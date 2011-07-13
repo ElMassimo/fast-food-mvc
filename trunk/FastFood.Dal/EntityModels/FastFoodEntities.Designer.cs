@@ -605,7 +605,7 @@ namespace FastFood.Dal.EntityModels
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("FastFoodEntities", "DeliveryBoyBranch", "DeliveryBoy")]
-        public EntityCollection<DeliveryBoy> DeliveryBoy
+        public EntityCollection<DeliveryBoy> DeliveryBoys
         {
             get
             {
@@ -901,8 +901,8 @@ namespace FastFood.Dal.EntityModels
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="succesfulDeliveries">Initial value of the SuccesfulDeliveries property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="userName">Initial value of the UserName property.</param>
-        public static DeliveryBoy CreateDeliveryBoy(global::System.Int32 id, global::System.String firstName, global::System.String lastName, global::System.Int32 succesfulDeliveries, global::System.String password, global::System.String userName)
+        /// <param name="nick">Initial value of the Nick property.</param>
+        public static DeliveryBoy CreateDeliveryBoy(global::System.Int32 id, global::System.String firstName, global::System.String lastName, global::System.Int32 succesfulDeliveries, global::System.String password, global::System.String nick)
         {
             DeliveryBoy deliveryBoy = new DeliveryBoy();
             deliveryBoy.Id = id;
@@ -910,7 +910,7 @@ namespace FastFood.Dal.EntityModels
             deliveryBoy.LastName = lastName;
             deliveryBoy.SuccesfulDeliveries = succesfulDeliveries;
             deliveryBoy.Password = password;
-            deliveryBoy.UserName = userName;
+            deliveryBoy.Nick = nick;
             return deliveryBoy;
         }
 
@@ -1045,24 +1045,24 @@ namespace FastFood.Dal.EntityModels
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String UserName
+        public global::System.String Nick
         {
             get
             {
-                return _UserName;
+                return _Nick;
             }
             set
             {
-                OnUserNameChanging(value);
-                ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("UserName");
-                OnUserNameChanged();
+                OnNickChanging(value);
+                ReportPropertyChanging("Nick");
+                _Nick = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Nick");
+                OnNickChanged();
             }
         }
-        private global::System.String _UserName;
-        partial void OnUserNameChanging(global::System.String value);
-        partial void OnUserNameChanged();
+        private global::System.String _Nick;
+        partial void OnNickChanging(global::System.String value);
+        partial void OnNickChanged();
 
         #endregion
     

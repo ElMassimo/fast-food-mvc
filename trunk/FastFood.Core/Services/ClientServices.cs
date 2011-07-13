@@ -11,7 +11,7 @@ namespace FastFood.Core.Services
 {
     public interface IClientServices : IServices<ClientModel>
     {
-
+        ClientModel GetClient(string mail);
     }
 
     public class ClientServices : BaseServices<Client, ClientModel>, IClientServices
@@ -36,7 +36,9 @@ namespace FastFood.Core.Services
         private IBranchRepository _branchRepo;
         private IAddressRepository _addressRepo;
         #endregion
-        
+
+        #region IServices<Client>
+
         public void Add(ClientModel model)
         {
             Client client = MappingServices.Current.ClientToEntity(model);
@@ -54,5 +56,17 @@ namespace FastFood.Core.Services
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region IClientServices
+
+        public ClientModel GetClient(string mail)
+        {
+            Client client = _mainRepo.GetSingle(c => c.Email == mail);
+            return MappingServices.Current.ClientToModel(client);
+        }
+
+        #endregion
     }
 }
