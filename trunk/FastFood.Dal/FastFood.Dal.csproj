@@ -115,7 +115,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FastFoodEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
