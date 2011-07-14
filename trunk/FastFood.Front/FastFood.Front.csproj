@@ -68,6 +68,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\background.jpg" />
+    <Content Include="Content\Images\beer.png" />
+    <Content Include="Content\Images\coffee.png" />
+    <Content Include="Content\Images\coffeecup.png" />
+    <Content Include="Content\Images\french-fries.png" />
+    <Content Include="Content\Images\grey-button-left.png" />
+    <Content Include="Content\Images\grey-button-repeat.png" />
+    <Content Include="Content\Images\grey-button-right.png" />
+    <Content Include="Content\Images\hamburger.png" />
+    <Content Include="Content\Images\header-background.jpg" />
+    <Content Include="Content\Images\hot-dog.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\pizza.png" />
+    <Content Include="Content\Images\soft-drink.png" />
+    <Content Include="Content\Images\sundae.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon_small.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
