@@ -11,6 +11,7 @@ namespace FastFood.Core.Services
 {
     public interface IClientServices : IServices<ClientModel>
     {
+        bool IsClient(string mail);
         ClientModel GetClient(string mail);
     }
 
@@ -41,8 +42,8 @@ namespace FastFood.Core.Services
 
         public void Add(ClientModel model)
         {
-            Client client = MappingServices.Current.ClientToEntity(model);
-            client.Address = MappingServices.Current.AddressToEntity(model.Address);
+            Client client = null;
+            client = model.ToEntity(client);
             _mainRepo.Add(client);
             _mainRepo.Save();
         }
@@ -54,17 +55,29 @@ namespace FastFood.Core.Services
 
         public void Update(ClientModel model)
         {
-            throw new NotImplementedException();
+            Client client = _mainRepo.GetSingle(c => c.Email == model.Email);
+            client = model.ToEntity(client);
+            client.Address = model.Address.ToEntity<AddressModel, Address>();
+            _mainRepo.Save();
         }
 
         #endregion
 
         #region IClientServices
 
+        public bool IsClient(string mail)
+        {
+            return _mainRepo.Any(c => c.Email == mail);
+        }
+
         public ClientModel GetClient(string mail)
         {
             Client client = _mainRepo.GetSingle(c => c.Email == mail);
-            return MappingServices.Current.ClientToModel(client);
+
+            if (client == null)
+                return null;
+
+            return client.ToModel<Client,ClientModel>();
         }
 
         #endregion

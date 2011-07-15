@@ -45,6 +45,16 @@ namespace FastFood.Dal.Infrastructure
             this.ObjectSet.DeleteObject(entity);
         }
 
+        public bool Any(Expression<Func<T, bool>> whereCondition)
+        {
+            return this.ObjectSet.Where(whereCondition).Any<T>();
+        }
+
+        public T GetSingle(Expression<Func<T, bool>> whereCondition)
+        {
+            return this.ObjectSet.Where(whereCondition).FirstOrDefault<T>();
+        }
+
         public IList<T> GetAll()
         {
             return this.ObjectSet.ToList<T>();
@@ -53,11 +63,6 @@ namespace FastFood.Dal.Infrastructure
         public IList<T> GetAll(Expression<Func<T, bool>> whereCondition)
         {
             return this.ObjectSet.Where(whereCondition).ToList<T>();
-        }
-
-        public T GetSingle(Expression<Func<T, bool>> whereCondition)
-        {
-            return this.ObjectSet.Where(whereCondition).FirstOrDefault<T>();
         }
 
         public void Attach(T entity)

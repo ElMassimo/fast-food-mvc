@@ -10,6 +10,13 @@ namespace FastFood.Dal.Infrastructure
     public interface IRepository<T> 
     {
         /// <summary>
+        /// Checks wheter any existent entity matches the given condition.
+        /// </summary>
+        /// <param name="whereCondition">The condition to be tested</param>
+        /// <returns>True if the condition is true for some entity</returns>
+        bool Any(Expression<Func<T, bool>> whereCondition);
+
+        /// <summary>
         /// Get a selected extiry by the object primary key ID
         /// </summary>
         /// <param name="id">Primary key ID</param>

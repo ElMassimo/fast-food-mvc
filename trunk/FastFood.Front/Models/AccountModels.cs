@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using FastFood.Core.Models;
 
 namespace FastFood.Front.Models
 {
@@ -32,8 +33,8 @@ namespace FastFood.Front.Models
     public class LogOnModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -45,23 +46,8 @@ namespace FastFood.Front.Models
     }
 
 
-    public class RegisterModel
+    public class RegisterModel : ClientModel
     {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email address")]
-        public string Email { get; set; }
-
-        [Required]
-        [ValidatePasswordLength]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]

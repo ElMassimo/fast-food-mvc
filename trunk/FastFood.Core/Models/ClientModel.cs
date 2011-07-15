@@ -21,7 +21,6 @@ namespace FastFood.Core.Models
         [StringLength(20, MinimumLength = 3, ErrorMessage = "The minimum length is 3 and the maximum length is 20")]
         public string LastName { get; set; }
 
-        [Required]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression("[0-9]{8,9}", ErrorMessage = "Not a valid phone number.")]
         [Display(Name = "Phone number")]
@@ -34,6 +33,10 @@ namespace FastFood.Core.Models
         [Display(Name = "Email address")]
         public string Email { get; set; }
 
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "The minimum password length is 6")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         public AddressModel Address { get; set; }

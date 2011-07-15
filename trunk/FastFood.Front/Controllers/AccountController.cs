@@ -25,10 +25,6 @@ namespace FastFood.Front.Controllers
             base.Initialize(requestContext);
         }
 
-        // **************************************
-        // URL: /Account/LogOn
-        // **************************************
-
         public ActionResult LogOn()
         {
             return View();
@@ -39,9 +35,9 @@ namespace FastFood.Front.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ValidateUser(model.UserName, model.Password))
+                if (MembershipService.ValidateUser(model.Email, model.Password))
                 {
-                    FormsService.SignIn(model.UserName, model.RememberMe);
+                    FormsService.SignIn(model.Email, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -56,26 +52,16 @@ namespace FastFood.Front.Controllers
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/LogOff
-        // **************************************
-
+        
         public ActionResult LogOff()
         {
             FormsService.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
-
-        // **************************************
-        // URL: /Account/Register
-        // **************************************
-
+        
         public ActionResult Register()
         {
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
@@ -88,11 +74,11 @@ namespace FastFood.Front.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
+                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.Email, model.Password, model.FirstName);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
+                    FormsService.SignIn(model.Email, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -100,16 +86,10 @@ namespace FastFood.Front.Controllers
                     ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/ChangePassword
-        // **************************************
-
+        
         [Authorize]
         public ActionResult ChangePassword()
         {
@@ -137,15 +117,17 @@ namespace FastFood.Front.Controllers
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/ChangePasswordSuccess
-        // **************************************
-
+        
         public ActionResult ChangePasswordSuccess()
         {
             return View();
         }
 
+        public ActionResult Unauthorized()
+        {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+                return RedirectToAction("LogOn", "Account");
+            return View();
+        }
     }
 }
