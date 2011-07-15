@@ -10,6 +10,7 @@ namespace FastFood.Core.Services
 {
     public interface IDeliveryServices : IServices<DeliveryBoyModel>
     {
+        bool IsDeliveryBoy(string nick);
         DeliveryBoyModel GetDeliveryBoy(string nick);
     }
 
@@ -42,8 +43,8 @@ namespace FastFood.Core.Services
 
         public void Add(DeliveryBoyModel model)
         {
-            DeliveryBoy deliveryBoy = MappingServices.Current.DeliveryBoyToEntity(model);
-            deliveryBoy.Branch = MappingServices.Current.BranchToEntity(model.Branch);
+            DeliveryBoy deliveryBoy = model.ToEntity<DeliveryBoyModel,DeliveryBoy>();
+            deliveryBoy.Branch = model.Branch.ToEntity<BranchModel, Branch>();
             _mainRepo.Add(deliveryBoy);
             _mainRepo.Save();
         }
@@ -61,11 +62,20 @@ namespace FastFood.Core.Services
         #endregion
 
         #region IDeliveryBoyServices
+        
+        public bool IsDeliveryBoy(string nick)
+        {
+            return _mainRepo.Any(d => d.Nick == nick);
+        }
 
         public DeliveryBoyModel GetDeliveryBoy(string nick)
         {
             DeliveryBoy deliveryBoy = _mainRepo.GetSingle(d => d.Nick == nick);
-            return MappingServices.Current.DeliveryBoyToModel(deliveryBoy);
+
+            if (deliveryBoy == null)
+                return null;
+
+            return deliveryBoy.ToModel<DeliveryBoy,DeliveryBoyModel>();
         }
 
         #endregion

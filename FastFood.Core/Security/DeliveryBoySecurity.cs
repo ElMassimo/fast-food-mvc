@@ -36,7 +36,7 @@ namespace FastFood.Core.Security
         {
             DeliveryBoyModel deliveryBoy = _deliveryServices.GetDeliveryBoy(nick);
             
-            if(deliveryBoy == null && deliveryBoy.Password == oldpass)
+            if(deliveryBoy != null && deliveryBoy.Password == oldpass)
             {
                 deliveryBoy.Password = newpass;
                 _deliveryServices.Update(deliveryBoy);
@@ -44,6 +44,11 @@ namespace FastFood.Core.Security
             }
 
             return false;
+        }
+
+        public bool IsUser(string nick)
+        {
+            return _deliveryServices.IsDeliveryBoy(nick);
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿@model FastFood.Front.Models.MessageModel
+
+@{
+    ViewBag.PageTitle = Model.Title;
+}
+
+<h2>@Model.Header</h2>
+
+<p>
+    @Model.Message. @Html.ActionLink("Go back", Model.Action, Model.Controller).
+</p>

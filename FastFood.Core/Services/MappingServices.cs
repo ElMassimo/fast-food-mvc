@@ -8,47 +8,37 @@ using AutoMapper;
 
 namespace FastFood.Core.Services
 {
-    public class MappingServices
+    public static class MappingServices
     {
-        private static MappingServices _instance = null;
+        private static bool _initialized = false;
 
-        public static MappingServices Current
+        private static void Initialize()
         {
-            get
+            if (!_initialized)
             {
-                if (_instance == null)
-                {
-                    _instance = new MappingServices();
-                }
-                return _instance;
+                InitializeAddressMapping();
+                InitializeClientMapping();
+                InitializeDeliveryBoyMapping();
+                InitializeBranchMapping();
+                _initialized = true;
             }
         }
 
-        private MappingServices()
-        {
-            InitializeAddressMapping();
-            InitializeClientMapping();
-            InitializeDeliveryBoyMapping();
-            InitializeBranchMapping();
-        }
-
-        private void InitializeAddressMapping()
+        private static void InitializeAddressMapping()
         {
             Mapper.CreateMap<AddressModel, Address>();
             Mapper.CreateMap<Address, AddressModel>();
         }
 
-        private void InitializeClientMapping()
+        private static void InitializeClientMapping()
         {
             Mapper.CreateMap<ClientModel, Client>()
-                .ForMember(c => c.Address, mo => mo.Ignore())
                 .ForMember(c => c.Orders, mo => mo.Ignore());
             Mapper.CreateMap<Client, ClientModel>()
-                .ForMember(cm => cm.Address, mo => mo.Ignore())
                 .ForMember(cm => cm.Orders, mo => mo.Ignore());
         }
-        
-        private void InitializeDeliveryBoyMapping()
+
+        private static void InitializeDeliveryBoyMapping()
         {
             Mapper.CreateMap<DeliveryBoyModel, DeliveryBoy>()
                 .ForMember(d => d.Orders, mo => mo.Ignore());
@@ -56,7 +46,7 @@ namespace FastFood.Core.Services
                 .ForMember(d => d.Orders, mo => mo.Ignore());
         }
 
-        private void InitializeBranchMapping()
+        private static void InitializeBranchMapping()
         {
             Mapper.CreateMap<BranchModel, Branch>()
                 .ForMember(b => b.DeliveryBoys, mo => mo.Ignore());
@@ -64,6 +54,42 @@ namespace FastFood.Core.Services
                 .ForMember(b => b.DeliveryBoys, mo => mo.Ignore());
         }
 
+        public static E ToEntity<M, E>(this M model, E entity = null) where E : class, new()
+        {
+            Initialize();
+            entity = entity ?? new E();
+            entity = Mapper.Map(model, entity);
+            return entity;
+        }
+
+        public static M ToModel<E, M>(this E entity) where M : class, new()
+        {
+            Initialize();
+            M model = new M();
+            model = Mapper.Map(entity, model);
+            return model;
+        }
+
+        /*
+        public Address AddressToEntity(AddressModel model, Address address = null)
+        {
+            return ModelToEntity(model, address);
+        }
+
+        public AddressModel AddressToModel(Address address)
+        {
+            return EntityToModel<Address, AddressModel>(address);
+        }
+
+        public Client ClientToEntity(ClientModel model, Client client = null)
+        {
+            return ModelToEntity(model, client);
+        }
+
+        public ClientModel ClientToModel(Client client)
+        {
+            return EntityToModel<Client, ClientModel>(client);
+        }
         public Address AddressToEntity(AddressModel model, Address address = null)
         {
             address = address ?? new Address();
@@ -91,7 +117,6 @@ namespace FastFood.Core.Services
             model = Mapper.Map(client, model);
             return model;
         }
-
         public Branch BranchToEntity(BranchModel model, Branch branch = null)
         {
             branch = branch ?? new Branch();
@@ -119,5 +144,6 @@ namespace FastFood.Core.Services
             model = Mapper.Map(deliveryBoy, model);
             return model;
         }
+        */
     }
 }

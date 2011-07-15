@@ -45,5 +45,10 @@ namespace FastFood.Core.Security
 
             return false;
         }
+
+        public bool IsUser(string mail)
+        {
+            return _clientServices.IsClient(mail);
+        }
     }
 }

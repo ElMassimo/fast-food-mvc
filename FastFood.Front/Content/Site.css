@@ -466,3 +466,94 @@ table th {
     padding: 6px 5px;
     text-align: left;
 }
+
+.boton
+{    
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    padding: 7px 10px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.boton-naranja-buscar-global {
+    font-size: 12pt;
+    height: 18px;
+    margin-left: 10px;
+    min-width: 60px;
+}
+styles...1106212 (line 154)
+.boton-naranja, .boton-naranja:visited 
+{
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc400', endColorstr='#ff5100',GradientType=0 );
+    background: -moz-linear-gradient(center top , #FFC400 0%, #FF5100 65%) repeat scroll 0 0 transparent;
+}
+styles...1106212 (line 113)
+.boton-css3 {
+}
+
+.boton-naranja:hover
+{
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa200', endColorstr='#ff2b00',GradientType=0 );
+}
+
+.boton-gris
+{
+    color: #D31921;
+    font-family: Tahoma;
+    font-size: 13px;
+    font-weight: bold;
+    
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D8D7D2;
+    border-radius: 12px;
+    
+    display: inline-block;
+    padding: 5px 15px 6px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    
+    background: -moz-linear-gradient(top, #FFFFFF, #EDEDED);
+    background-image: -webkit-linear-gradient(#FFFFFF, #EDEDED); 
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFF,EndColorStr=#EDEDED);
+}
+
+.boton-gris:hover
+{
+    
+}
+
+.gradient-bg {
+   /* fallback/image non-cover color */
+   background-color: #1a82f7; 
+
+   /* fallback image */
+   background-image: url(images/fallback-gradient.png); 
+
+   /* Firefox 3.6+ */
+   background-image: -moz-linear-gradient(#2F2727, #1a82f7);
+
+   /* Safari 4+, Chrome 1+ */
+   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1a82f7), to(#2F2727));
+
+   /* Safari 5.1+, Chrome 10+ */
+   background-image: -webkit-linear-gradient(#2F2727, #1a82f7); 
+
+   /* Opera 11.10+ */
+   background-image: -o-linear-gradient(#2F2727, #1a82f7);
+   
+   background: -moz-linear-gradient(top, rgba(123,104,238,1), rgba(0,0,205,1));
+
+/* Chrome 7+ & Safari 5.03+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(123,104,238,1)), color-stop(1, rgba(0,0,205,1)));
+
+/* IE5.5 - IE7 */
+filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FF7B68EE,EndColorStr=#FF0000CD);
+}
