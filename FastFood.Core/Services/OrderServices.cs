@@ -15,26 +15,24 @@ namespace FastFood.Core.Services
     {
         #region Constructor / Repositories
         public OrderServices()
-            : this(new OrderRepository(), new ClientRepository(), new DeliveryBoyRepository(), new BranchRepository(), new AddressRepository())
+            : this(new OrderRepository(), new ClientRepository(), new DeliveryBoyRepository(), new RestaurantRepository(), new AddressRepository())
         {
         }
 
-        public OrderServices(IOrderRepository orderRepo, IClientRepository clientRepo, IDeliveryBoyRepository deliveryRepo, IBranchRepository branchRepo, IAddressRepository addressRepo)
+        public OrderServices(IOrderRepository orderRepo, IClientRepository clientRepo, IDeliveryBoyRepository deliveryRepo, IRestaurantRepository restaurantRepo, IAddressRepository addressRepo)
         {
             _orderRepo = orderRepo;
             _clientRepo = clientRepo;
             _deliveryRepo = deliveryRepo;
-            _branchRepo = branchRepo;
+            _restaurantRepo = restaurantRepo;
             _addressRepo = addressRepo;
         }
 
         private IOrderRepository _orderRepo;
         private IClientRepository _clientRepo;
         private IDeliveryBoyRepository _deliveryRepo;
-        private IBranchRepository _branchRepo;
+        private IRestaurantRepository _restaurantRepo;
         private IAddressRepository _addressRepo;
         #endregion
-
-
     }
 }

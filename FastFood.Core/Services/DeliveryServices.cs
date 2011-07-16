@@ -19,22 +19,22 @@ namespace FastFood.Core.Services
         #region Constructors / Repositories
 
         public DeliveryServices()
-            : this(new OrderRepository(), new DeliveryBoyRepository(), new DeliveryBoyRepository(), new BranchRepository(), new AddressRepository())
+            : this(new OrderRepository(), new DeliveryBoyRepository(), new DeliveryBoyRepository(), new RestaurantRepository(), new AddressRepository())
         {
         }
 
-        public DeliveryServices(IOrderRepository orderRepo, IDeliveryBoyRepository clientRepo, IDeliveryBoyRepository deliveryRepo, IBranchRepository branchRepo, IAddressRepository addressRepo)
+        public DeliveryServices(IOrderRepository orderRepo, IDeliveryBoyRepository clientRepo, IDeliveryBoyRepository deliveryRepo, IRestaurantRepository restaurantRepo, IAddressRepository addressRepo)
             : base(deliveryRepo)
         {
             _orderRepo = orderRepo;
             _clientRepo = clientRepo;
-            _branchRepo = branchRepo;
+            _restaurantRepo = restaurantRepo;
             _addressRepo = addressRepo;
         }
 
         private IOrderRepository _orderRepo;
         private IDeliveryBoyRepository _clientRepo;
-        private IBranchRepository _branchRepo;
+        private IRestaurantRepository _restaurantRepo;
         private IAddressRepository _addressRepo;
 
         #endregion
@@ -44,7 +44,7 @@ namespace FastFood.Core.Services
         public void Add(DeliveryBoyModel model)
         {
             DeliveryBoy deliveryBoy = model.ToEntity<DeliveryBoyModel,DeliveryBoy>();
-            deliveryBoy.Branch = model.Branch.ToEntity<BranchModel, Branch>();
+            deliveryBoy.Restaurant = model.Restaurant.ToEntity<RestaurantModel, Restaurant>();
             _mainRepo.Add(deliveryBoy);
             _mainRepo.Save();
         }

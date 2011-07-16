@@ -8,7 +8,7 @@
     <title>@ViewBag.PageTitle - @ViewBag.Title</title>
     <link rel="icon" href="@Url.Content("~/favicon_small.ico")"/>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.6.2.js")" type="text/javascript"></script>
     <!-- CSS -->
     <link href="/static/v4/css/main.css?e24v=29" rel="stylesheet" type="text/css" />
     <link href="/static/v4/css/s_welcome.css?e24v=29" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="header">
-        <div class="page">
+        <div class="center">
             <span>                
                 @Html.Partial("_LogOnPartial")
             </span>
@@ -36,7 +36,7 @@
             <div id="title" class="left-container">            
                 <a href="@Url.Action("Index", "Home")">
                     <div class="left-container">
-                        <img src="@Url.Content("~/Content/Images/logo.png")" alt="logo" />      
+                        <img src="@Url.Content("~/Content/Images/logo.png")" border="0" alt="logo" />      
                     </div>            
                     <div class="right-container">   
                             <h1>@ViewBag.Title</h1>
@@ -53,7 +53,6 @@
         </header>
         <div id="main">
             @RenderBody()            
-            <a class="boton-gris" title="Login">Login</a>
 
             <div id="container">                
                 
