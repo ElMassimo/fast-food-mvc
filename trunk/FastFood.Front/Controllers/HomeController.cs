@@ -17,7 +17,7 @@ namespace FastFood.Front.Controllers
         {
             AddressModel address = new AddressModel()
             {
-                ApartmentNumber = 104,
+                ApartmentNumber = "104",
                 Number = 520,
                 Street = "Maggiolo",
                 City = "Montevideo",

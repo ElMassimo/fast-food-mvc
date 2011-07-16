@@ -3,12 +3,12 @@ using FastFood.Dal.Infrastructure;
 
 namespace FastFood.Dal.Repositories
 {
-    public interface IBranchRepository : IRepository<Branch>
+    public interface IRestaurantRepository : IRepository<Restaurant>
     {
 
     }
 
-    public class BranchRepository : RepositoryBase<Branch>, IBranchRepository
+    public class RestaurantRepository : RepositoryBase<Restaurant>, IRestaurantRepository
     {
     }
 }
