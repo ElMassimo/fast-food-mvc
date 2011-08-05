@@ -23,17 +23,20 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="FOOD EXPRESS" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="login" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
+            <Grid Height="94">
+                <Image Height="63" Name="imgLogo" Stretch="Uniform" Width="81" Source="/FoodExpress.Phone;component/logo.png" HorizontalAlignment="Center" Margin="370,0,18,32" />
+                <TextBlock x:Name="PageTitle" Text="login"  Style="{StaticResource PhoneTextTitle1Style}" Margin="6,-16,-6,0" />
+            </Grid>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="25,70,0,0" Name="txtNick" Text="" VerticalAlignment="Top" Width="412"/>
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="25,34,0,0" Name="lblNick" Text="Nick" VerticalAlignment="Top" FontSize="28" />
-            <TextBlock FontSize="28" Height="30" HorizontalAlignment="Left" Margin="25,150,0,0" Name="lblPassword" Text="Password" VerticalAlignment="Top" />
-            <PasswordBox Height="72" HorizontalAlignment="Left" Margin="25,186,0,0" Name="txtPassword" VerticalAlignment="Top" Width="412" />
-            <Button Content="Login" Height="101" HorizontalAlignment="Center" Margin="0,282,0,0" Name="btnLogin" VerticalAlignment="Top" Width="200" FontSize="36" Padding="0" Click="btnLogin_Click" />
-            <Image Height="150" Name="image1" Stretch="Uniform" Width="154" Source="/FoodExpress.Phone;component/logo.png" Margin="0,427,0,30" HorizontalAlignment="Center" />
+            <TextBox Height="72" HorizontalAlignment="Left" Margin="25,132,0,0" Name="txtNick" Text="" VerticalAlignment="Top" Width="412"/>
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="25,96,0,0" Name="lblNick" Text="Nick" VerticalAlignment="Top" FontSize="28" />
+            <TextBlock FontSize="28" Height="30" HorizontalAlignment="Left" Margin="25,212,0,0" Name="lblPassword" Text="Password" VerticalAlignment="Top" />
+            <PasswordBox Height="72" HorizontalAlignment="Left" Margin="25,248,0,0" Name="txtPassword" VerticalAlignment="Top" Width="412" />
+            <Button Content="Login" Height="101" HorizontalAlignment="Center" Margin="128,344,128,0" Name="btnLogin" VerticalAlignment="Top" Width="200" FontSize="36" Padding="0" Click="btnLogin_Click" />
+            <TextBlock Height="88" HorizontalAlignment="Left" Name="txtErrorMessage" Text="" VerticalAlignment="Top" Width="444" Margin="6,0,0,0" Padding="20" Foreground="Red" TextAlignment="Left" />
         </Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

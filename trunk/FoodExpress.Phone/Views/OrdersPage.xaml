@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="FoodExpress.Phone.Views.Orders"
+    x:Class="FoodExpress.Phone.Views.OrdersPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -16,8 +16,8 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="618*"/>
+            <RowDefinition Height="144"/>
+            <RowDefinition Height="624*"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
@@ -25,15 +25,19 @@
             <TextBlock Name="ApplicationTitle" Style="{StaticResource PhoneTextNormalStyle}" Text="FOOD EXPRESS" />
             <Grid Height="94">
                 <Image Height="63" Name="image1" Stretch="Uniform" Width="81" Source="/FoodExpress.Phone;component/logo.png" HorizontalAlignment="Center" Margin="370,0,18,32" />
-                <TextBlock x:Name="PageTitle" Text="orders"  Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,253,0" />                
+                <TextBlock x:Name="PageTitle" Text="orders"  Style="{StaticResource PhoneTextTitle1Style}" Margin="0,-16,0,0" />                
             </Grid>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox Height="460" HorizontalAlignment="Center" Margin="0,51,0,0" Name="orderList" VerticalAlignment="Top" Width="438" />
-            <Button Content="Next" FontSize="36" Height="101" HorizontalAlignment="Center" Margin="121,517,135,0" Name="btnNext" Padding="0" VerticalAlignment="Top" Width="200" />
-            <TextBlock Height="39" HorizontalAlignment="Left" Margin="12,6,0,0" Name="lblSelectOrder" Text="Select an order:" VerticalAlignment="Top" Width="435" FontSize="24" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="227*" />
+                <ColumnDefinition Width="229*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Height="460" HorizontalAlignment="Center" Margin="-12,51,-12,0" Name="orderList" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="2"></ListBox>
+            <Button Content="Next" FontSize="36" Height="101" HorizontalAlignment="Center" Margin="121,517,135,0" Name="btnNext" Padding="0" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" Click="btnNext_Click" />
+            <TextBlock Height="39" HorizontalAlignment="Left" Margin="12,6,0,0" Name="lblSelectOrder" Text="Select an order:" VerticalAlignment="Top" Width="435" FontSize="24" Grid.ColumnSpan="2" />
         </Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

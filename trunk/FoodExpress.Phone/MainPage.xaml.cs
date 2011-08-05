@@ -10,44 +10,67 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using FoodExpress.Phone.FastFoodServices;
+using FoodExpress.Phone.Models;
 
 namespace FoodExpress.Phone
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        // Constructor
         public MainPage()
         {
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            lblSelectOrder.Text = "Please enter your username and password to log in";
+            txtErrorMessage.Foreground = new SolidColorBrush(Colors.White);
+        }
+
+
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtNick.Text) || txtNick.Text.Length < 3)
-                return;
-            if(String.IsNullOrEmpty(txtPassword.Password) || txtPassword.Password.Length < 6)
-                return;
-                       
-            //DeliveryServices
-            //var services = new DeliveryServices
-            //client.GetCatastrophesCompleted += (s, ea) =>
-            //{
-            //    if (!ea.Cancelled)
-            //        CatastropheComboBox.ItemsSource = ea.Result;
-            //    else
-            //        CatastropheComboBox.ItemsSource = new List<string>() { "Connection Unavailable" };
+            User.Nick = txtNick.Text == null ? null : txtNick.Text.Trim();
+            User.Password = txtPassword.Password == null ? null : txtPassword.Password.Trim();
 
-            //    CatastropheComboBox.SelectedIndex = 0;
-            //};
-            //client.GetCatastrophesAsync();
+            User.Nick = "Jero";
+            User.Password = "holanda";
 
-            //    (App.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/InfoPage.xaml", UriKind.Relative));
-            //}
-            //else
-            //{
-            //    lblSelectCastastrophe.Text = Assets.Resources.ApplicationStrings.SelectCatastropheValidationError;
-            //    lblSelectCastastrophe.Foreground = new SolidColorBrush(Color.FromArgb(255, 200, 0, 0));
-            //}
+            txtErrorMessage.Foreground = new SolidColorBrush(Colors.Red);
+
+            if (String.IsNullOrEmpty(User.Nick) || String.IsNullOrEmpty(User.Password))
+            {
+                txtErrorMessage.Text = "Please enter your username and password";
+                return;
+            }
+
+            if (User.Nick.Length < 3 || User.Password.Length < 6)
+            {
+                txtErrorMessage.Text = "Username minimum length is 3.\nPassword minimum length is 6";
+                return;
+            }
+
+            var services = new DeliveryServicesClient();
+            services.GetUndeliveredOrdersCompleted += (s, ea) =>
+                {
+                    txtErrorMessage.Text = String.Empty;
+                    if (ea.Cancelled)
+                        txtErrorMessage.Text = "Connection error: Please try again later";
+                    else
+                    {
+                        Orders.Undelivered = ea.Result;
+                        if (Orders.Undelivered == null)
+                            txtErrorMessage.Text = "Incorrect username or password";
+                        else
+                            (App.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/OrdersPage.xaml", UriKind.Relative));
+                    }
+                };
+
+            txtErrorMessage.Text = "Logging in...";
+            txtErrorMessage.Foreground = new SolidColorBrush(Colors.White);
+            services.GetUndeliveredOrdersAsync(User.Nick, User.Password);
         }
     }
 }
