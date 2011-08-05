@@ -1,0 +1,14 @@
+﻿@model FastFood.Core.Models.RestaurantModel
+
+@{
+    ViewBag.PageTitle = Model.Name;
+}
+
+<h2>@Model.Name</h2>
+
+@Html.DisplayFor(r => r.Address)
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

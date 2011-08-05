@@ -8,23 +8,17 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using FastFood.Front.Models;
+using FastFood.Core.Security;
+using FastFood.Core.Services;
+using FastFood.Core.Models;
 
 namespace FastFood.Front.Controllers
 {
     public class AccountController : Controller
     {
-
-        public IFormsAuthenticationService FormsService { get; set; }
-        public IMembershipService MembershipService { get; set; }
-
-        protected override void Initialize(RequestContext requestContext)
-        {
-            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
-
-            base.Initialize(requestContext);
-        }
-
+        private ISecurity clientSecurity = new ClientSecurity();
+        private IClientServices clientServices = new ClientServices();
+        
         public ActionResult LogOn()
         {
             return View();
@@ -34,66 +28,53 @@ namespace FastFood.Front.Controllers
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
-            {
-                if (MembershipService.ValidateUser(model.Email, model.Password))
+                if (clientSecurity.ValidateUser(model.Email,
+                    FormsAuthentication.HashPasswordForStoringInConfigFile(model.Password, "sha1")))
                 {
-                    FormsService.SignIn(model.Email, model.RememberMe);
+                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
-                    {
                         return Redirect(returnUrl);
-                    }
                     else
-                    {
                         return RedirectToAction("Index", "Home");
-                    }
                 }
                 else
-                {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
-            }
+
             return View(model);
         }
         
         public ActionResult LogOff()
         {
-            FormsService.SignOut();
+            FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
         
         public ActionResult Register()
         {
-            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             return View();
         }
 
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.Email, model.Password, model.FirstName);
-
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsService.SignIn(model.Email, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
-                }
+            if (ModelState.IsValid) try{
+                ClientModel client = model;
+                client.Password = FormsAuthentication.HashPasswordForStoringInConfigFile(client.Password, "sha1");
+                clientServices.Add(client);
+                FormsAuthentication.SetAuthCookie(model.Email, false);
+                return RedirectToAction("Index", "Home");
             }
-            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+            }
             return View(model);
         }
         
         [Authorize]
         public ActionResult ChangePassword()
         {
-            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             return View();
         }
 
@@ -101,20 +82,26 @@ namespace FastFood.Front.Controllers
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
+            bool changePasswordSucceeded;
             if (ModelState.IsValid)
             {
-                if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                try
                 {
-                    return RedirectToAction("ChangePasswordSuccess");
+                    changePasswordSucceeded = clientSecurity.ChangePassword
+                        (FormsAuthentication.HashPasswordForStoringInConfigFile(model.OldPassword, "sha1")
+                        , FormsAuthentication.HashPasswordForStoringInConfigFile(model.NewPassword, "sha1")
+                        , User.Identity.Name);
                 }
-                else
+                catch
                 {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    changePasswordSucceeded = false;
                 }
-            }
 
-            // If we got this far, something failed, redisplay form
-            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+                if (changePasswordSucceeded)
+                    return RedirectToAction("ChangePasswordSuccess");
+                else
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+            }
             return View(model);
         }
         
@@ -127,7 +114,7 @@ namespace FastFood.Front.Controllers
         {
             if (User.Identity != null && User.Identity.IsAuthenticated)
                 return RedirectToAction("LogOn", "Account");
-            return View();
+            return RedirectToAction("LogOn", "Account");
         }
     }
 }

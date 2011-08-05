@@ -38,7 +38,19 @@ namespace FastFood.Core.Models
         public string Country { get; set; }
 
         [Display(Name = "Postal code")]
-        [StringLength(30, MinimumLength = 3)]
         public int? PostalCode { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(50);
+            sb.AppendFormat("{0} {1}", Street, Number);
+            if(!String.IsNullOrWhiteSpace(ApartmentNumber))
+                sb.AppendFormat(" apt. {0}", ApartmentNumber);
+            sb.AppendFormat(", {0}", City);
+            if(!String.IsNullOrWhiteSpace(State) && !State.Equals(City))
+                sb.AppendFormat(", {0}", State);
+            sb.AppendFormat(", {0}", Country);
+            return sb.ToString();
+        }
     }
 }

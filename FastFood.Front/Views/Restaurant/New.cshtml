@@ -1,18 +1,18 @@
 ﻿@model FastFood.Core.Models.RestaurantModel
 
 @{
-    ViewBag.Title = "New";
+    ViewBag.PageTitle = "Create a new restaurant";
 }
 
-<h2>New</h2>
+<h2>Create a new restaurant</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("New", "Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>RestaurantModel</legend>
+        <legend>Name</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -21,11 +21,13 @@
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
     </fieldset>
+    
+    @Html.EditorFor(r => r.Address)
+    
+    <p>
+        <input type="submit" value="Create" />
+    </p>
 }
 
 <div>

@@ -1,64 +1,25 @@
 ﻿@model FastFood.Core.Models.AddressModel
 
-@Html.ValidationSummary(true)
 <fieldset>
     <legend>Address</legend>
+    <div class="display-label">Street</div>
+    <div class="display-field">@Model.Street</div>
+    
+    <div class="display-label">Number</div>
+    <div class="display-field">@Model.Number</div>
 
-    @Html.HiddenFor(model => model.Id)
+    <div class="display-label">Apartment number</div>
+    <div class="display-field">@Model.ApartmentNumber</div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.Number)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.Number)
-        @Html.ValidationMessageFor(model => model.Number)
-    </div>
+    <div class="display-label">City</div>
+    <div class="display-field">@Model.City</div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.ApartmentNumber)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.ApartmentNumber)
-        @Html.ValidationMessageFor(model => model.ApartmentNumber)
-    </div>
+    <div class="display-label">State</div>
+    <div class="display-field">@Model.State</div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.Street)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.Street)
-        @Html.ValidationMessageFor(model => model.Street)
-    </div>
+    <div class="display-label">Country</div>
+    <div class="display-field">@Model.Country</div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.City)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.City)
-        @Html.ValidationMessageFor(model => model.City)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.State)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.State)
-        @Html.ValidationMessageFor(model => model.State)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.Country)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.Country)
-        @Html.ValidationMessageFor(model => model.Country)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.PostalCode)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.PostalCode)
-        @Html.ValidationMessageFor(model => model.PostalCode)
-    </div>
+    <div class="display-label">PostalCode</div>
+    <div class="display-field">@Model.PostalCode</div>
 </fieldset>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/15/2011 19:36:36
+-- Date Created: 08/01/2011 20:59:03
 -- Generated from EDMX file: C:\Users\MM\Documents\Visual Studio 2010\Projects\FastFood\FastFood.Dal\EntityModels\FastFoodEntities.edmx
 -- --------------------------------------------------
 

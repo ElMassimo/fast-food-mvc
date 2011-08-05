@@ -12,13 +12,13 @@ namespace FastFood.Core.Models
         public int Id { get; set; }
 
         [DisplayName("First Name")]
-        [Required(ErrorMessage = "First name required")]
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "The minimum length is 3 and the maximum length is 20")]
+        [Required]
+        [StringLength(20, MinimumLength = 3)]
         public string FirstName { get; set; }
 
         [DisplayName("Last Name")]
-        [Required(ErrorMessage = "Last name required")]
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "The minimum length is 3 and the maximum length is 20")]
+        [Required]
+        [StringLength(20, MinimumLength = 3)]
         public string LastName { get; set; }
 
         [DataType(DataType.PhoneNumber)]
@@ -36,7 +36,7 @@ namespace FastFood.Core.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "The minimum length is 6 and the maximum length is 20")]
+        [StringLength(20, MinimumLength = 6)]
         public string Password { get; set; }
 
         public AddressModel Address { get; set; }

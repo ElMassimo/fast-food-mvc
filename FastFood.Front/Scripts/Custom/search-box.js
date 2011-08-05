@@ -1,8 +1,8 @@
 ﻿var searchBox = null;
 var searchButton = null;
 var validationSummary = null;
-var addressRegexp = /^\s*([^,]+?)\s+(\d{1,5})\s*((,\s*[^,]+?\s*){2,3})$/;
-var commaRegexp = /^\s*(.+?)\s*$/;
+var addressRegexp = /^\s*([^,]+)\s+(\d{1,5})\s*((,\s*[^,]+\s*){2,3})$/;
+var commaRegexp = /^\s*(.+)\s*$/;
 var EMPTY_SEARCH = "Please enter your address (example: Maggiolo 520, Montevideo, Uruguay)";
 var WRONG_FORMAT = "Please enter your address correctly (example: Maggiolo 520, Montevideo, Uruguay)";
 
@@ -37,8 +37,20 @@ function validateSearch() {
     }
 }
 
+function focusIn() {
+    searchBox.removeClass("blurry");
+}
+
+function focusOut() {
+    if (searchBox.val().length == 0) {
+        searchBox.addClass("blurry");
+    }
+}
+
 $(document).ready(function () {
     validationSummary = $("#validationSummary");
     searchBox = $("#txtSearchBox");
+    searchBox.focus(focusIn).focusout(focusOut);
     searchButton = $("#btnSearch").click(validateSearch);
+    focusOut();
 });    

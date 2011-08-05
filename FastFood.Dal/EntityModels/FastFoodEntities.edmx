@@ -78,7 +78,7 @@
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SuccesfulDeliveries" Type="int" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Nick" Type="nvarchar" StoreGeneratedPattern="Identity" Nullable="false" MaxLength="20" />
+    <Property Name="Nick" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="Restaurant_Name" Type="nvarchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="Restaurants">
@@ -235,7 +235,7 @@
           <NavigationProperty Name="Orders" Relationship="FastFoodEntities.OrderDeliveryBoy" FromRole="DeliveryBoy" ToRole="Order" />
           <NavigationProperty Name="Restaurant" Relationship="FastFoodEntities.DeliveryBoyRestaurant" FromRole="DeliveryBoy" ToRole="Restaurant" />
           <Property Type="String" Name="Password" Nullable="false" FixedLength="false" />
-          <Property Type="String" Name="Nick" Nullable="false" MaxLength="20" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nick" Nullable="false" MaxLength="20" annotation:StoreGeneratedPattern="None" FixedLength="false" />
         </EntityType>
         <Association Name="OrderDeliveryBoy">
           <End Type="FastFoodEntities.Order" Role="Order" Multiplicity="*" />

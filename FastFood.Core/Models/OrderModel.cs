@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace FastFood.Core.Models
 {
@@ -17,8 +18,8 @@ namespace FastFood.Core.Models
         public int Id { get; set; }
 
         [DisplayName("Description")]
-        [Required(ErrorMessage = "Description required")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "The minimum length is 3 and the maximum length is 100")]
+        [Required]
+        [StringLength(100, MinimumLength = 3)]
         public string Description { get; set; }
 
         [DataType(DataType.DateTime)]

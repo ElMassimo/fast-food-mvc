@@ -1,0 +1,34 @@
+﻿@model IEnumerable<FastFood.Core.Models.RestaurantModel>
+
+@{
+    ViewBag.PageTitle = "Restaurants";
+}
+
+<h2>Restaurants</h2>
+
+<p>
+    @Html.ActionLink("Create a new restaurant", "New")
+</p>
+<table>
+    <tr>
+        <th>
+            Restaurant name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @Html.ActionLink("Make an order", "Make", "Order", new { restaurantName = item.Name }, new { }) | 
+            @Html.ActionLink("Add delivery boy", "Add", "Delivery", new { restaurantName = item.Name }, new { }) | 
+            @Html.ActionLink("Details", "Details", new { name=item.Name })
+        </td>
+    </tr>
+}
+
+</table>
+

@@ -20,6 +20,7 @@ namespace FastFood.Core.Services
                 InitializeClientMapping();
                 InitializeDeliveryBoyMapping();
                 InitializeRestaurantMapping();
+                InitializeOrderMapping();
                 _initialized = true;
             }
         }
@@ -41,6 +42,7 @@ namespace FastFood.Core.Services
         private static void InitializeDeliveryBoyMapping()
         {
             Mapper.CreateMap<DeliveryBoyModel, DeliveryBoy>()
+                .ForMember(d => d.Restaurant, mo => mo.Ignore())
                 .ForMember(d => d.Orders, mo => mo.Ignore());
             Mapper.CreateMap<DeliveryBoy, DeliveryBoyModel>()
                 .ForMember(d => d.Orders, mo => mo.Ignore());
@@ -52,6 +54,19 @@ namespace FastFood.Core.Services
                 .ForMember(b => b.DeliveryBoys, mo => mo.Ignore());
             Mapper.CreateMap<Restaurant, RestaurantModel>()
                 .ForMember(b => b.DeliveryBoys, mo => mo.Ignore());
+        }
+
+        private static void InitializeOrderMapping()
+        {
+            Mapper.CreateMap<OrderModel, Order>()
+                .ForMember(o => o.Client, mo => mo.Ignore())
+                .ForMember(o => o.DeliveryBoy, mo => mo.Ignore());
+            Mapper.CreateMap<Order, OrderModel>();
+
+            Mapper.CreateMap<OrderStatus, Int16>()
+                .ConvertUsing(os => (Int16)os);
+            Mapper.CreateMap<Int16, OrderStatus>()
+                .ConvertUsing(s => (OrderStatus)s);
         }
 
         public static E ToEntity<M, E>(this M model, E entity = null) where E : class, new()
@@ -68,6 +83,13 @@ namespace FastFood.Core.Services
             M model = new M();
             model = Mapper.Map(entity, model);
             return model;
+        }
+
+        public static IList<M> ToModels<E, M>(this IEnumerable<E> entities) where M : class, new()
+        {
+            Initialize();
+            List<M> models = new List<M>();
+            return Mapper.Map(entities, models);
         }
     }
 }

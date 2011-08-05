@@ -12,6 +12,7 @@ namespace FastFood.Core.Services
     {
         bool Exists(string name);
         RestaurantModel Get(string name);
+        bool AnyNearBy(AddressModel address);
         IEnumerable<RestaurantModel> NearBy(AddressModel address);
     }
 
@@ -57,7 +58,7 @@ namespace FastFood.Core.Services
         {
             Restaurant restaurant = _mainRepo.GetSingle(c => c.Name == model.Name);
             restaurant = model.ToEntity(restaurant);
-            restaurant.Address = model.Address.ToEntity<AddressModel, Address>();
+            restaurant.Address = model.Address.ToEntity<AddressModel, Address>(restaurant.Address);
             _mainRepo.Save();
         }
 
@@ -80,12 +81,16 @@ namespace FastFood.Core.Services
             return restaurant.ToModel<Restaurant,RestaurantModel>();
         }
 
+        public bool AnyNearBy(AddressModel address)
+        {
+            return _mainRepo.Any(r => r.Address.PostalCode == address.PostalCode);
+        }
+
         public IEnumerable<RestaurantModel> NearBy(AddressModel address)
         {
-            var restaurants = from r in _mainRepo.GetQueryable()
-                            where r.Address.PostalCode == address.PostalCode
-                            select r.ToModel<Restaurant, RestaurantModel>();
-            return restaurants;
+            IList<Restaurant> restaurants = _mainRepo.GetAll(r => r.Address.PostalCode == address.PostalCode);
+
+            return restaurants.ToModels<Restaurant, RestaurantModel>();
         }
 
         #endregion

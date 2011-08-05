@@ -15,34 +15,11 @@ namespace FastFood.Front.Controllers
     {
         public ActionResult Index()
         {
-            AddressModel address = new AddressModel()
-            {
-                ApartmentNumber = "104",
-                Number = 520,
-                Street = "Maggiolo",
-                City = "Montevideo",
-                State = "Montevideo",
-                Country = "Uruguay",
-                PostalCode = 11200
-            };
-            ClientModel client = new ClientModel()
-            {
-                Address = address,
-                Email = "maximomussini@gmail.com",
-                FirstName = "Maximo",
-                LastName = "Mussini",
-                Password = "holanda",
-                Phone = "099479451"                
-            };
-            IClientServices services = new ClientServices();
-            services.Add(client);
-
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            ViewBag.Message = "Welcome to the fastest delivery service!";
 
             return View();
         }
 
-        [ClientAuthorize]
         public ActionResult About()
         {
             return View();

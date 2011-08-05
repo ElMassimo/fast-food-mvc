@@ -15,6 +15,6 @@ namespace FastFood.Core.Models
 
         public AddressModel Address { get; set; }
 
-        public IList<DeliveryBoyModel> DeliveryBoys { get; set; }
+        public IEnumerable<DeliveryBoyModel> DeliveryBoys { get; set; }
     }
 }
