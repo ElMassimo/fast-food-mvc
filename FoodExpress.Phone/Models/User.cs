@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
 
-namespace FoodExpress.Phone.Views
+namespace FoodExpress.Phone.Models
 {
-    public partial class Orders : PhoneApplicationPage
+    public static class User
     {
-        public Orders()
-        {
-            InitializeComponent();
-        }
+        public static string Nick { get; set; }
+        public static string Password { get; set; }
     }
 }

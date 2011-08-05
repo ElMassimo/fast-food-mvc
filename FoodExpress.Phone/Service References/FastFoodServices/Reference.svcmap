@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="88d28235-c845-42ed-b2bb-6371677c3510" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/FastFood.Services/DeliveryServices.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DeliveryServices.xsd" MetadataType="Schema" ID="879e1a1f-dd36-48b0-a1d5-54a192eb35af" SourceId="1" SourceUrl="http://localhost/FastFood.Services/DeliveryServices.svc?xsd=xsd2" />
+    <MetadataFile FileName="DeliveryServices.wsdl" MetadataType="Wsdl" ID="db456fbc-5abd-47e1-a39c-c355ca9fd4c4" SourceId="1" SourceUrl="http://localhost/FastFood.Services/DeliveryServices.svc?wsdl" />
+    <MetadataFile FileName="DeliveryServices1.xsd" MetadataType="Schema" ID="8ced57a1-af15-4827-82c4-492ea715b5a5" SourceId="1" SourceUrl="http://localhost/FastFood.Services/DeliveryServices.svc?xsd=xsd0" />
+    <MetadataFile FileName="DeliveryServices2.xsd" MetadataType="Schema" ID="a93ff56e-ce85-4e42-a588-1522a72c5ce5" SourceId="1" SourceUrl="http://localhost/FastFood.Services/DeliveryServices.svc?xsd=xsd1" />
+    <MetadataFile FileName="DeliveryServices.disco" MetadataType="Disco" ID="62f548f6-591d-449c-a18c-77c86adf3267" SourceId="1" SourceUrl="http://localhost/FastFood.Services/DeliveryServices.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
