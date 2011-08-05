@@ -44,7 +44,7 @@ namespace FastFood.Core.Services
         public void Add(DeliveryBoyModel model)
         {
             DeliveryBoy deliveryBoy = model.ToEntity<DeliveryBoyModel,DeliveryBoy>();
-            deliveryBoy.Restaurant = model.Restaurant.ToEntity<RestaurantModel, Restaurant>();
+            deliveryBoy.Restaurant = _restaurantRepo.GetSingle(r => r.Name == model.Restaurant.Name);
             _mainRepo.Add(deliveryBoy);
             _mainRepo.Save();
         }

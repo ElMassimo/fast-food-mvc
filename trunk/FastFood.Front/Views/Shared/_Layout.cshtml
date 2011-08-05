@@ -9,19 +9,6 @@
     <link rel="icon" href="@Url.Content("~/favicon_small.ico")"/>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery-1.6.2.js")" type="text/javascript"></script>
-    <!-- CSS -->
-    <link href="/static/v4/css/main.css?e24v=29" rel="stylesheet" type="text/css" />
-    <link href="/static/v4/css/s_welcome.css?e24v=29" rel="stylesheet" type="text/css" />
-    <link href="/static/css/common.css?e24v=29" rel="stylesheet" type="text/css" />
-    <link href="/static/v4/css/radiobtn_effect.css?e24v=29" rel="stylesheet" type="text/css" />
-    <!-- JS -->
-    <script language="JavaScript" src="/static/js/mootools.js?e24v=29"></script>
-    <script language="JavaScript" src="/static/js/extras.js?e24v=29"></script>
-    <script language="JavaScript" src="/static/js/js_http_request.js?e24v=29"></script>
-    <script language="JavaScript" src="/static/js/sms.js?e24v=29"></script>
-    <script language="JavaScript" src="/static/js/stickywin.js?e24v=29" defer></script>
-    <script src="/static/js/radiobtn_effect.js?e24v=29" type="text/javascript"></script>
-    <script src="/static/js/iepngfix_tilebg.js?e24v=29" type="text/javascript"> </script>
 </head>
 <body>
     <div id="header">
@@ -47,224 +34,20 @@
             <div id="menucontainer">            
                 <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Restaurants", "Index", "Restaurant")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
             </div>     
         </header>
         <div id="main">
-            @RenderBody()            
-
-            <div id="container">                
-                
-            <div id="cusine_shortcuts">
-                <!-- Start #cusine_shortcuts -->
-                <div id="cusine_img">
-                    <div class="cusine_img_item">
-                        <a href="/pizza">
-                            <img src="/static/v4/images/pizza_shortcut.jpg?e24v=29" alt="Pizza" width="170" height="125"
-                                border="0" title="Pizza" /></a></div>
-                    <div class="cusine_img_item">
-                        <a href="/chinese">
-                            <img src="/static/v4/images/chinese_shortcut.jpg?e24v=29" alt="Chinese" width="170"
-                                height="125" border="0" title="Chinese" /></a></div>
-                    <div class="cusine_img_item">
-                        <a href="/indian">
-                            <img src="/static/v4/images/indian_shortcut.jpg?e24v=29" alt="Indian" width="170"
-                                height="125" border="0" title="Indian" /></a></div>
-                    <div class="cusine_img_item">
-                        <a href="/thai">
-                            <img src="/static/v4/images/thai_shortcut.jpg?e24v=29" alt="Thai" width="170" height="125"
-                                border="0" title="Thai" /></a></div>
-                    <div class="cusine_img_item_last">
-                        <a href="/sushi">
-                            <img src="/static/v4/images/sushi_shortcut.jpg?e24v=29" alt="Sushi" width="170" height="125"
-                                border="0" title="Sushi" /></a></div>
-                </div>
-                <div id="cusine_link">
-                    <div class="cusine_link_item">
-                        <a href="/pizza" title="Pizza">
-                            <h3>
-                                Pizza</h3>
-                        </a>
-                    </div>
-                    <div class="cusine_link_item">
-                        <a href="/chinese" title="Chinese">
-                            <h3>
-                                Chinese</h3>
-                        </a>
-                    </div>
-                    <div class="cusine_link_item">
-                        <a href="/indian" title="Indian">
-                            <h3>
-                                Indian</h3>
-                        </a>
-                    </div>
-                    <div class="cusine_link_item">
-                        <a href="/thai" title="Thai">
-                            <h3>
-                                Thai</h3>
-                        </a>
-                    </div>
-                    <div class="cusine_link_item_last">
-                        <a href="/sushi" title="Sushi">
-                            <h3>
-                                Sushi</h3>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- End #cusine_shortcuts -->
-            <div class="space_between">
-            </div>
-            <div>
-                <img src="/static/v4/images/eat_about1.jpg?e24v=29" width="979" height="311" alt="How it works"
-                    title="How it works" />
-            </div>
-            <div class="space_between">
-            </div>
-            <div id="main_contents">
-                <!-- Begin #main_contents -->
-                <div id="main_content_left">
-                    <div>
-                        <img class="d-block" src="/static/v4/images/reviews_bg_top.png?e24v=29" width="319"
-                            height="9" alt="From the Word" title="From the Word" /></div>
-                    <div id="main_content_left_middle">
-                        <div id="main_content_left_title">
-                            <span>Tried, Tested and True</span>
-                        </div>
-                        <div class="main_content_left_img">
-                            <img src="/static/v4/images/reviews_quotes.png?e24v=29" width="44" height="48" alt="Quote"
-                                title="Quote" />
-                        </div>
-                        <div class="main_content_left_text">
-                            <span>Sushi delivery to our university, what can beat that?! Order food online&quot;</span>
-                            <p>
-                                - Chris, <a href="http://los-angeles.eat24hours.com/" title="Los Angeles">Los Angeles</a></p>
-                        </div>
-                        <div class="main_content_left_img">
-                            <img src="/static/v4/images/reviews_quotes.png?e24v=29" width="44" height="48" alt="Quote"
-                                title="Quote" />
-                        </div>
-                        <div class="main_content_left_text">
-                            <span>Office lunch deliveries are always HOT and always on TIME"</span>
-                            <p>
-                                - Joy, <a href="http://boston.eat24hours.com/" title="Boston">Boston</a>
-                            </p>
-                        </div>
-                        <div class="main_content_left_img">
-                            <img src="/static/v4/images/reviews_quotes.png?e24v=29" width="44" height="48" alt="Quote"
-                                title="Quote" />
-                        </div>
-                        <div class="main_content_left_text">
-                            <span>Eat 24 Hours covers my breakfast, lunch, dinner and late night cravings" </span>
-                            <p>
-                                - Sarah, <a href="http://san-francisco.eat24hours.com/" title="San Francisco">San Francisco</a></p>
-                        </div>
-                        <div class="main_content_left_img">
-                            <img src="/static/v4/images/reviews_quotes.png?e24v=29" width="44" height="48" alt="Quote"
-                                title="Quote" />
-                        </div>
-                        <div class="main_content_left_text">
-                            <span>Eat24 is awesome I use it all the time. Super convenient - Love the easy reordering
-                                option. Best online ordering service"</span>
-                            <p>
-                                - David, <a href="http://new-york.eat24hours.com/" title="NYC">NYC</a></p>
-                        </div>
-                    </div>
-                    <div style="float: left;">
-                        <img class="d-block" src="/static/v4/images/reviews_bg_bottom.png?e24v=29" width="319"
-                            height="10" alt="From the Word" title="From the Word" /></div>
-                </div>
-                <div id="main_content_right">
-                    <div id="main_content_right_title">
-                        eat24 is easy as 1, 2, 3 ...</div>
-                    <div class="main_content_right_img">
-                        <img src="/static/v4/images/enter_address_icon-1.png?e24v=29" width="92" height="92"
-                            alt="Enter your Address" title="Enter your Address" />
-                    </div>
-                    <div class="main_content_right_text">
-                        <div class="main_content_right_subtitle">
-                            1. Enter your Address</div>
-                        <span>Use our search box to discover local restaurants that deliver to you. Eat24Hours
-                            searches in its network of delivery restaurants, and shows you a list of restaurants
-                            that deliver to your address, whether it be your home, office or campus.</span><br />
-                    </div>
-                    <div class="main_content_right_img">
-                        <img src="/static/v4/images/select_rest_icon-1.png?e24v=29" width="92" height="92"
-                            alt="Select a Restaurant" title="Select a Restaurant" />
-                    </div>
-                    <div class="main_content_right_text">
-                        <div class="main_content_right_subtitle">
-                            2. Select a Restaurant</div>
-                        <span>Browse delivery, takeout and catering restaurants menus, read reviews and enjoy
-                            coupons and discounts. You can choose a restaurant according to a cuisine you like,
-                            such as Pizza, Chinese food, Thai food, Indian food and even Mexican food, by their
-                            distance from you, rating or by reviews left by other customers.</span>
-                    </div>
-                    <div class="main_content_right_img">
-                        <img src="/static/v4/images/order-1.png?e24v=29" width="92" height="92" alt="Order Delivery Online"
-                            title="Order Delivery Online" />
-                    </div>
-                    <div class="main_content_right_text">
-                        <div class="main_content_right_subtitle">
-                            3. Order Online, the Restaurant Delivers</div>
-                        <span>Found a restaurant you like? View the menu, choose your dishes and place your
-                            order online, our service is completely free and as easy and simple as one, two,
-                            three! Much better than ordering over the phone. Like we always say: "Don't be on
-                            hold, be online".</span>
-                    </div>
-                </div>
-                <div id="slogan">
-                    <img height="232" width="910" title="Order Online and Save - Get CashCoupon" alt="Order Online and Save - Get CashCoupon"
-                        src="/static/v4/images/cashcoupon1.jpg?e24v=29" border="0">
-                </div>
-                <div style="clear: both;">
-                </div>
-            </div>
-            <!-- End #main_contents -->
-            <div class="space_between">
-            </div>
-            <div id="footer">
-                <!-- begin #footer -->
-                <div id="xfooter_icons">
-                    <div class='iconbox' id="xchat">
-                        <a onclick="var url='http://eat24hours.com/index.php?SCR=s_chat&href='+window.location;var date = new Date(); var unique=date.getTime();newwin = window.open( url, unique, 'scrollbars=no,menubar=no,resizable=0,location=no,screenX=50,screenY=100,width=462,height=380');newwin.focus();"
-                            onmouseout="window.status=''; return true;" onmouseover="window.status='Click for Live Support'; return true;"
-                            href="JavaScript:void(0)" title="Live Chat/Help"><span>Chat Support</span></a></div>
-                    <div class='iconbox' id="xcontact_us">
-                        <a href="http://eat24hours.com/index.php?SCR=s_contact" title="Contact Us"><span>Contact
-                            Us</span></a>
-                    </div>
-                    <div class='iconbox' id="xabout_us">
-                        <a href="http://eat24hours.com/index.php?SCR=s_about" title="About Us"><span>About Us</span>
-                        </a>
-                    </div>
-                    <div class='iconbox' id="xfacebook">
-                        <a rel="nofollow" href="http://www.facebook.com/eat24hours/" title="Become a Fan"
-                            target="_blank"><span>Become a Fan</span></a></div>
-                    <div class='iconbox' id="xtwitter">
-                        <a rel="nofollow" href="http://twitter.com/eat24hours/" title="Follow Us" target="_blank">
-                            <span>Follow Us</span></a></div>
-                    <div class='iconbox' id="xrestaurant_owners">
-                        <a href="http://eat24hours.com/join" title="Restaurant Owners"><span>Restaurant Owners</span></a>
-                    </div>
-                    <div class='iconbox' id="xfmobile">
-                        <a href="http://eat24hours.com/mobile" title="Mobile"><span>Mobile</span></a>
-                    </div>
-                </div>                
-                <div id="footer_text">
-                    <span><a href="?SCR=s_privacy">View Privacy Statement</a></span><br />
-                    <span><a href="?SCR=s_terms">By using our site you agree to our terms of use.</a></span><br />
-                    <div id="copyr">
-                        Copyright <span onclick='window.location="/index.php?cache=refresh"'>&copy;</span>
-                        2011 <a href='http://eat24hours.com'>Eat24Hours.com -</a> <a href='http://eat24hours.com'>
-                            Food Delivery</a></div>
-                </div>
-                <!-- end #footer -->
-            </div>
-            <!-- end #container -->
+            @RenderBody()                    
         </div>
-    </div>
+        <footer>
+                <div id="copyr">
+                    Copyright <span onclick='window.location="/index.php?cache=refresh"'>&copy;</span>
+                    2011 <a href='http://FoodExpress.com'>FoodExpress.com -</a> <a href='http://FoodExpress.com'>
+                        Food Delivery</a></div>
+        </footer>
     </div>
 </body>
 </html>

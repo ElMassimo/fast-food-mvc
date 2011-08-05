@@ -53,6 +53,14 @@ namespace FastFood.Front.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class RegisterDeliveryBoyModel : DeliveryBoyModel
+    {
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
     #endregion
 
     #region Services

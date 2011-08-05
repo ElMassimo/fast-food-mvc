@@ -489,32 +489,11 @@ table th {
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 
-.boton-naranja-buscar-global {
-    font-size: 12pt;
-    height: 18px;
-    margin-left: 10px;
-    min-width: 60px;
-}
-styles...1106212 (line 154)
-.boton-naranja, .boton-naranja:visited 
-{
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc400', endColorstr='#ff5100',GradientType=0 );
-    background: -moz-linear-gradient(center top , #FFC400 0%, #FF5100 65%) repeat scroll 0 0 transparent;
-}
-styles...1106212 (line 113)
-.boton-css3 {
-}
-
-.boton-naranja:hover
-{
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa200', endColorstr='#ff2b00',GradientType=0 );
-}
-
 .boton-gris
 {
     color: #D31921;
     font-family: Tahoma;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bold;
     
     border-style: solid;
@@ -527,6 +506,7 @@ styles...1106212 (line 113)
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+    height:37px;
     
     background: -moz-linear-gradient(top, #FFFFFF, #CFCFCF);
     background-image: -webkit-linear-gradient(#FFFFFF, #CFCFCF); 
@@ -582,27 +562,29 @@ styles...1106212 (line 113)
     display: block;
     overflow: hidden;  
     margin: 10px auto auto;
-    padding: 5px 0 10px 10px;
-    width: 850px;    
+    padding-top: 5px;
+    width: 700px;    
 }
 
 #search-box{
     float: left;
-    margin-left: 20px;
     padding: 5px 3px 3px 5px;
 }
 
-#search-box input[type=search] {
+.blurry { 
     color: #878787;
-    font-style: italic;
+}
+
+#search-box input[type=search] {
     background: none repeat scroll 0 0 #FFFFFF;
     border: medium none;
     border-radius: 3px;
     float: left;
     font-size: 12pt;
-    height: 29px;
+    height: 37px;
     padding-left: 5px;
     width: 570px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) inset;
 }
 
 #searchForm {
@@ -610,4 +592,13 @@ styles...1106212 (line 113)
     margin-left: 5px;
     float: left;
     height: 29px;
+}
+
+#lblSearchBox {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 10px;
+    position:relative;
+    top: 5px;
 }

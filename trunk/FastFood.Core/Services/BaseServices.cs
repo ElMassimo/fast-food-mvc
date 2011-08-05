@@ -7,7 +7,8 @@ using AutoMapper;
 
 namespace FastFood.Core.Services
 {
-    public abstract class BaseServices<E, M>
+    public abstract class BaseServices<E, M> 
+        where M : class, new()
     {
         protected IRepository<E> _mainRepo;
         
@@ -18,10 +19,8 @@ namespace FastFood.Core.Services
         
         public virtual IList<M> GetAll()
         {
-            IList<E> entities = _mainRepo.GetAll();            
-            IList<M> models = new List<M>();
-            models = Mapper.Map(entities, models);
-            return models;
+            IList<E> entities = _mainRepo.GetAll();
+            return entities.ToModels<E, M>();
         }
     }
 }
