@@ -35,7 +35,13 @@
                 <ColumnDefinition Width="227*" />
                 <ColumnDefinition Width="229*" />
             </Grid.ColumnDefinitions>
-            <ListBox Height="460" HorizontalAlignment="Center" Margin="-12,51,-12,0" Name="orderList" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="2"></ListBox>
+            <ListBox Height="460" HorizontalAlignment="Center" Margin="-12,51,-12,0" Name="orderList" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <Button Content="Next" FontSize="36" Height="101" HorizontalAlignment="Center" Margin="121,517,135,0" Name="btnNext" Padding="0" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" Click="btnNext_Click" />
             <TextBlock Height="39" HorizontalAlignment="Left" Margin="12,6,0,0" Name="lblSelectOrder" Text="Select an order:" VerticalAlignment="Top" Width="435" FontSize="24" Grid.ColumnSpan="2" />
         </Grid>

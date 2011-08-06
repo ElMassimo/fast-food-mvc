@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodExpress.Phone", "FoodEx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFood.Services", "FastFood.Services\FastFood.Services.csproj", "{B2395A42-C02F-4D9D-8DB5-0896AFF4900D}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "FastFood.Cloud", "FastFood.Cloud\FastFood.Cloud.ccproj", "{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,16 @@ Global
 		{B2395A42-C02F-4D9D-8DB5-0896AFF4900D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B2395A42-C02F-4D9D-8DB5-0896AFF4900D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B2395A42-C02F-4D9D-8DB5-0896AFF4900D}.Release|x86.ActiveCfg = Release|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{46D8CC77-5E1C-4FDE-A433-739F84FBDEC5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

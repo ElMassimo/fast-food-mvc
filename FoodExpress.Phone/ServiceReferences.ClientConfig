@@ -9,7 +9,7 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://localhost/FastFood.Services/DeliveryServices.svc"
+            <endpoint address="http://43378c2291804f848d7c89cd80ef44b5.cloudapp.net:8080/DeliveryServices.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IDeliveryServices"
                 contract="FastFoodServices.IDeliveryServices" name="BasicHttpBinding_IDeliveryServices" />
         </client>
