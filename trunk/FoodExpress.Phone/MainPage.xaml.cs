@@ -25,7 +25,7 @@ namespace FoodExpress.Phone
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            lblSelectOrder.Text = "Please enter your username and password to log in";
+            txtErrorMessage.Text = "Please enter your username and password to log in";
             txtErrorMessage.Foreground = new SolidColorBrush(Colors.White);
         }
 
@@ -34,10 +34,7 @@ namespace FoodExpress.Phone
         {
             User.Nick = txtNick.Text == null ? null : txtNick.Text.Trim();
             User.Password = txtPassword.Password == null ? null : txtPassword.Password.Trim();
-
-            User.Nick = "Jero";
-            User.Password = "holanda";
-
+            
             txtErrorMessage.Foreground = new SolidColorBrush(Colors.Red);
 
             if (String.IsNullOrEmpty(User.Nick) || String.IsNullOrEmpty(User.Password))
