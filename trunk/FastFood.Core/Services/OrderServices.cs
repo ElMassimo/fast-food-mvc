@@ -14,6 +14,7 @@ namespace FastFood.Core.Services
         OrderModel Get(int id);
         void UpdateStatus(int orderId, OrderStatus status);
         IList<OrderModel> GetUndeliveredOrders(string nick);
+        IList<OrderModel> GetClientOrders(string email);
     }
 
     public class OrderServices : IOrderServices
@@ -80,6 +81,13 @@ namespace FastFood.Core.Services
         public IList<OrderModel> GetUndeliveredOrders(string nick)
         {
             IEnumerable<Order> orders = _mainRepo.GetAll(o => o.DeliveryBoy.Nick == nick && o.Status == (short)OrderStatus.Assigned);
+            return orders.ToModels<Order, OrderModel>();
+        }
+
+        public IList<OrderModel> GetClientOrders(string email)
+        {
+            DateTime oldestDate = DateTime.Now.AddDays(-7);
+            IEnumerable<Order> orders = _mainRepo.GetAll(o => o.Client.Email == email && o.DateOrdered > oldestDate);
             return orders.ToModels<Order, OrderModel>();
         }
         #endregion

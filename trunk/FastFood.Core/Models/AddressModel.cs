@@ -9,6 +9,7 @@ namespace FastFood.Core.Models
     public class AddressModel
     {
         public int Id { get; set; }
+        public string DependentLocalityName { get; set; }
 
         [Required]
         [RegularExpression("^[0-9]{1,5}$", ErrorMessage = "Not a valid street number.")]

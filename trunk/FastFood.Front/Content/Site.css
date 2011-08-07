@@ -249,24 +249,10 @@ ul#menu li#greeting
 
 ul#menu li a
 {
-    padding: 10px 20px;
     font-weight: bold;
     text-decoration: none;
-    line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
-}
-
-ul#menu li a:hover
-{
-    background-color: #fff;
-    text-decoration: none;
-}
-
-ul#menu li a:active
-{
-    background-color: #a6e2a6;
-    text-decoration: none;
+    line-height: 1.8em;
+    padding: 7px 10px;
 }
 
 ul#menu li.selected a
@@ -444,7 +430,7 @@ body
 }
      
 #main{
-    border-radius: 10px;
+    border-radius: 10px 0px 10px 10px;
 }
      
      
@@ -482,45 +468,49 @@ table th {
     cursor: pointer;
     display: block;
     font-weight: bold;
-    padding: 7px 10px;
     position: relative;
     text-align: center;
     text-decoration: none;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 
-.boton-gris
+ul#menu li a, .boton-gris, input[type=submit]
 {
     color: #D31921;
     font-family: Tahoma;
     font-size: 15px;
     font-weight: bold;
+    border-radius: 5px 5px 0px 0px; 
     
     border-style: solid;
     border-width: 1px;
     border-color: #D8D7D2;
-    border-radius: 12px;
     
     display: inline-block;
     padding: 5px 15px 6px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    height:37px;
     
     background: -moz-linear-gradient(top, #FFFFFF, #CFCFCF);
     background-image: -webkit-linear-gradient(#FFFFFF, #CFCFCF); 
     filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFF,EndColorStr=#CFCFCF);
 }
 
-.boton-gris:hover
+.boton-gris, input[type=submit]
+{
+    height:37px;
+    border-radius: 12px; 
+}
+
+ul#menu li a:hover, .boton-gris:hover, input[type=submit]:hover
 {
     background: -moz-linear-gradient(top, #FFFFFF, #F0F0F0);
     background-image: -webkit-linear-gradient(#FFFFFF, #F0F0F0); 
     filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFF,EndColorStr=#F0F0F0);    
 }
 
-.boton-gris:active
+ul#menu li a:active, .boton-gris:active, input[type=submit]:active
 {
     position:relative;
     top: 1px;
@@ -601,4 +591,14 @@ table th {
     padding-left: 10px;
     position:relative;
     top: 5px;
+}
+
+.display-field {
+    position: relative;
+    left : 20px; 
+}
+
+.editor-field textarea {
+    width: 300px;
+    height: 150px;
 }

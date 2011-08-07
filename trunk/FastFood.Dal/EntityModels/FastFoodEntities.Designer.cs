@@ -427,6 +427,30 @@ namespace FastFood.Dal.EntityModels
         private global::System.String _ApartmentNumber;
         partial void OnApartmentNumberChanging(global::System.String value);
         partial void OnApartmentNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DependentLocalityName
+        {
+            get
+            {
+                return _DependentLocalityName;
+            }
+            set
+            {
+                OnDependentLocalityNameChanging(value);
+                ReportPropertyChanging("DependentLocalityName");
+                _DependentLocalityName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DependentLocalityName");
+                OnDependentLocalityNameChanged();
+            }
+        }
+        private global::System.String _DependentLocalityName;
+        partial void OnDependentLocalityNameChanging(global::System.String value);
+        partial void OnDependentLocalityNameChanged();
 
         #endregion
     
@@ -1249,10 +1273,12 @@ namespace FastFood.Dal.EntityModels
         /// Create a new Restaurant object.
         /// </summary>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Restaurant CreateRestaurant(global::System.String name)
+        /// <param name="description">Initial value of the Description property.</param>
+        public static Restaurant CreateRestaurant(global::System.String name, global::System.String description)
         {
             Restaurant restaurant = new Restaurant();
             restaurant.Name = name;
+            restaurant.Description = description;
             return restaurant;
         }
 
@@ -1285,6 +1311,30 @@ namespace FastFood.Dal.EntityModels
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
 
         #endregion
     

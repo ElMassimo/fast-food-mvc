@@ -11,9 +11,9 @@ using FastFood.Front.Security;
 
 namespace FastFood.Front.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             ViewBag.Message = "Welcome to the fastest delivery service!";
 

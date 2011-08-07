@@ -5,8 +5,14 @@
 }
 
 <h2>@Model.Name</h2>
+<h3>@Model.Description</h3>
 
 @Html.DisplayFor(r => r.Address)
+
+@if (ViewBag.IsAdmin)
+{
+    @Html.ActionLink("Manage restaurant delivery service", "Employees", new { controller = "Delivery", restaurantName = Model.Name })
+}
 
 <p>
     @Html.ActionLink("Back to List", "Index")

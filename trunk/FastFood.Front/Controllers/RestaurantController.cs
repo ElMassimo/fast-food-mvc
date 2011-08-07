@@ -6,51 +6,62 @@ using System.Web.Mvc;
 using FastFood.Core.Models;
 using FastFood.Core.Services;
 using FastFood.Front.Models;
+using FastFood.Front.Security;
 
 namespace FastFood.Front.Controllers
 {
-    public class RestaurantController : Controller
+    public class RestaurantController : BaseController
     {
-        private IRestaurantServices restaurantServices = new RestaurantServices();
-               
+        protected IRestaurantServices restaurantServices = new RestaurantServices();
+        protected IClientServices clientServices = new ClientServices();
+
+        private void LoadViewBag(RestaurantListType listType)
+        {
+            ViewBag.ListType = listType;
+            switch (listType)
+            {
+                case RestaurantListType.All:
+                    ViewBag.PageTitle = "All restaurants";
+                    ViewBag.NoRestaurants = "There are no restaurants in the system";
+                    break;
+                case RestaurantListType.Client:
+                case RestaurantListType.Search:
+                    ViewBag.PageTitle = "Restaurants in your area";
+                    ViewBag.NoRestaurants = "There are no restaurants near your area";
+                    break;
+            }
+        }
+
         public ActionResult Index()
         {
-            return View(restaurantServices.GetAll());
+            if (ClientAuthorizeAttribute.IsClient(User))
+            {
+                AddressModel address = clientServices.GetClient(User.Identity.Name).Address;
+                LoadViewBag(RestaurantListType.Client);
+                return View(restaurantServices.NearBy(address));
+            }
+            return RedirectToAction("All");
         }
-        
+
+        public ActionResult All()
+        {
+            LoadViewBag(RestaurantListType.All);
+            return View("Index", restaurantServices.GetAll());
+        }
+
         public ActionResult Search(AddressModel address)
         {
-            if (ModelState.IsValid && restaurantServices.AnyNearBy(address))
-            {                
-                return View("Index", restaurantServices.NearBy(address));
-            }
-            return View("Message", new MessageModel("Restaurants", "Restaurants near by", "Sorry, there are no restaurants that deliver to your address"));
-        }
-        
-        public ActionResult New()
-        {
-            return View();
-        } 
-
-        [HttpPost]
-        public ActionResult New(RestaurantModel restaurant)
-        {
-            if(ModelState.IsValid)
-            try
+            address.DependentLocalityName = GetLocalityName(address.ToString());
+            if(address.DependentLocalityName != null)
             {
-                if (restaurantServices.Exists(restaurant.Name))
-                    ModelState.AddModelError("", "A restaurant with the name " + restaurant.Name + " already exists");
-                else
+                if (ModelState.IsValid && restaurantServices.AnyNearBy(address))
                 {
-                    restaurantServices.Add(restaurant);
-                    return View("Message", new MessageModel("Create a new restaurant", "Thank you", "The restaurant was succesfully registered", "New", "Restaurant"));
+                    LoadViewBag(RestaurantListType.Search);
+                    return View("Index", restaurantServices.NearBy(address));
                 }
+                return View("Message", new MessageModel("Restaurants", "Restaurants near by", "Sorry, there are no restaurants near your location"));
             }
-            catch(Exception e)
-            {
-                return View("Message", new MessageModel("Create a new restaurant", "Oops!", e.Message));
-            }
-            return View(restaurant);
+            return View("Message", new MessageModel("Restaurants", "Restaurants near by", "Sorry, the Google web service we use to obtain your location couldn't process your address"));
         }
 
         public ActionResult Details(string name)

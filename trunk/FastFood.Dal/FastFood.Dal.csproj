@@ -132,6 +132,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EntityModels\Datos.sql" />
     <Content Include="EntityModels\FastFoodEntities.edmx.sql" />
   </ItemGroup>
   <ItemGroup />

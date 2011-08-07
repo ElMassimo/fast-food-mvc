@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FastFood.Core.Models.DeliveryBoyModel>
+
+@{
+    ViewBag.PageTitle = "Employees";
+}
+
+<h2>@ViewBag.RestaurantName's Employees</h2>
+
+<p>
+    @Html.ActionLink("Add a new delivery boy", "Add", new { restaurantName = ViewBag.RestaurantName })
+</p>
+<table>
+    <tr>
+        <th>
+            First name
+        </th>
+        <th>
+            Last name
+        </th>
+        <th>
+            Nick
+        </th>
+        <th>
+            Succesful deliveries
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nick)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuccesfulDeliveries)
+        </td>
+    </tr>
+}
+
+</table>

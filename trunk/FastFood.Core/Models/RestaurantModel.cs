@@ -12,6 +12,11 @@ namespace FastFood.Core.Models
         [Display(Name = "Name")]
         [StringLength(30, MinimumLength = 3)]
         public string Name { get; set; }
+        
+        [Required]
+        [Display(Name = "Description")]
+        [StringLength(30, MinimumLength = 3)]
+        public string Description { get; set; }
 
         public AddressModel Address { get; set; }
 
