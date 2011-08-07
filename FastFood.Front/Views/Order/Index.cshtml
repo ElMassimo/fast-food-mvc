@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<FastFood.Core.Models.OrderModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.PageTitle = "Your orders";
 }
 
-<h2>Client orders</h2>
+<h2>Recent orders</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th></th>
@@ -19,7 +16,7 @@
             Description
         </th>
         <th>
-            DateOrdered
+            Date ordered
         </th>
         <th>
             Status
@@ -47,4 +44,6 @@
 }
 
 </table>
+
+<h5>*Only orders requested during the last seven days are shown</h5>
 

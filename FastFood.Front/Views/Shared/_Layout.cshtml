@@ -14,7 +14,7 @@
     <div id="header">
         <div class="center">
             <span>                
-                @Html.Partial("_LogOnPartial")
+                @Html.Partial("_LoginPartial")
             </span>
         </div>
     </div>
@@ -32,8 +32,12 @@
                 </a>              
             </div>
             <div id="menucontainer">            
-                <ul id="menu">
+                <ul id="menu">                                       
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if(!ViewBag.IsAdmin)
+                    {       
+                        <li>@Html.ActionLink("My orders", "Index", "Order")</li>
+                    }
                     <li>@Html.ActionLink("Restaurants", "Index", "Restaurant")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
@@ -43,10 +47,7 @@
             @RenderBody()                    
         </div>
         <footer>
-                <div id="copyr">
-                    Copyright <span onclick='window.location="/index.php?cache=refresh"'>&copy;</span>
-                    2011 <a href='http://FoodExpress.com'>FoodExpress.com -</a> <a href='http://FoodExpress.com'>
-                        Food Delivery</a></div>
+            Copyright &copy; 2011 <a style="color:#000;font-weight:bolder;" href='mailto:maximomussini@hotmail.com'>Máximo Mussini</a>
         </footer>
     </div>
 </body>

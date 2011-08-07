@@ -30,10 +30,10 @@ namespace FastFood.Front.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LogOnModel
+    public class LoginModel
     {
         [Required]
-        [Display(Name = "E-mail")]
+        [Display(Name = "Email address")]
         public string Email { get; set; }
 
         [Required]
@@ -45,8 +45,30 @@ namespace FastFood.Front.Models
         public bool RememberMe { get; set; }
     }
 
+    public class RegisterModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
 
-    public class RegisterModel : ClientModel
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email address")]
+        public string Email { get; set; }
+
+        [Required]
+        [ValidatePasswordLength]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
+
+    public class RegisterClientModel : ClientModel
     {
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
@@ -60,6 +82,22 @@ namespace FastFood.Front.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public RegisterDeliveryBoyModel() { }
+
+        public RegisterDeliveryBoyModel(string restaurantName)
+        {
+            Restaurant = new RestaurantModel() { Name = restaurantName , Description = "Mock description" };
+        }
+
+        public RegisterDeliveryBoyModel(DeliveryBoyModel model)
+        {
+            FirstName = model.FirstName;
+            LastName = model.LastName;
+            Nick = model.Nick;
+            Password = model.Password;
+            Restaurant = model.Restaurant;
+        }
     }
     #endregion
 

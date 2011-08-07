@@ -1,34 +1,64 @@
-﻿@model IEnumerable<FastFood.Core.Models.RestaurantModel>
+﻿@model IList<FastFood.Core.Models.RestaurantModel>
+@using FastFood.Front.Models
 
-@{
-    ViewBag.PageTitle = "Restaurants";
+<h2>@ViewBag.PageTitle</h2>
+
+@if (ViewBag.IsAdmin)
+{
+<p>
+    @Html.ActionLink("Create a new restaurant", "New", new RouteValueDictionary(new { area = "Admin" }))
+</p>
 }
 
-<h2>Restaurants</h2>
-
-<p>
-    @Html.ActionLink("Create a new restaurant", "New")
-</p>
+@if (Model.Count == 0)
+{
+    <h3>@ViewBag.NoRestaurants</h3>
+}
+else
+{
 <table>
     <tr>
         <th>
             Restaurant name
         </th>
+        <th>
+            Restaurant description
+        </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @item.Name
         </td>
         <td>
-            @Html.ActionLink("Make an order", "Make", "Order", new { restaurantName = item.Name }, new { }) | 
-            @Html.ActionLink("Add delivery boy", "Add", "Delivery", new { restaurantName = item.Name }, new { }) | 
-            @Html.ActionLink("Details", "Details", new { name=item.Name })
+            @item.Description
+        </td>
+        <td>            
+            @if (ViewBag.IsAdmin)
+            {         
+                @Html.ActionLink("Add delivery boy", "Add", new { controller = "Delivery", area = "Admin", restaurantName = item.Name })
+                <text> | </text>
+                @Html.ActionLink("Employees", "Employees", new { controller = "Delivery", area = "Admin", restaurantName = item.Name })
+            }
+            else
+            {
+                @Html.ActionLink("Make an order", "Make", new { controller = "Order", restaurantName = item.Name })
+            }
+            | @Html.ActionLink("Details", "Details", new { name = item.Name })
         </td>
     </tr>
-}
+    }
 
 </table>
+}
+
+@if (ViewBag.ListType != RestaurantListType.All)
+{
+<p>
+    @Html.ActionLink("View all restaurants", "All", new { controller = "Restaurant" })
+</p>
+}
 

@@ -14,18 +14,18 @@ using FastFood.Core.Models;
 
 namespace FastFood.Front.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ISecurity clientSecurity = new ClientSecurity();
         private IClientServices clientServices = new ClientServices();
         
-        public ActionResult LogOn()
+        public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult LogOn(LogOnModel model, string returnUrl)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
                 if (clientSecurity.ValidateUser(model.Email,
@@ -56,11 +56,12 @@ namespace FastFood.Front.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterClientModel model)
         {
             if (ModelState.IsValid) try{
                 ClientModel client = model;
                 client.Password = FormsAuthentication.HashPasswordForStoringInConfigFile(client.Password, "sha1");
+                client.Address.DependentLocalityName = GetLocalityName(client.Address.ToString());
                 clientServices.Add(client);
                 FormsAuthentication.SetAuthCookie(model.Email, false);
                 return RedirectToAction("Index", "Home");
@@ -113,8 +114,8 @@ namespace FastFood.Front.Controllers
         public ActionResult Unauthorized()
         {
             if (User.Identity != null && User.Identity.IsAuthenticated)
-                return RedirectToAction("LogOn", "Account");
-            return RedirectToAction("LogOn", "Account");
+                return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

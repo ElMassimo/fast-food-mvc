@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/01/2011 20:59:03
+-- Date Created: 08/06/2011 21:15:54
 -- Generated from EDMX file: C:\Users\MM\Documents\Visual Studio 2010\Projects\FastFood\FastFood.Dal\EntityModels\FastFoodEntities.edmx
 -- --------------------------------------------------
 
@@ -91,7 +91,8 @@ CREATE TABLE [dbo].[Addresses] (
     [Country] nvarchar(max)  NOT NULL,
     [PostalCode] int  NOT NULL,
     [Number] smallint  NOT NULL,
-    [ApartmentNumber] nvarchar(max)  NULL
+    [ApartmentNumber] nvarchar(max)  NULL,
+    [DependentLocalityName] nvarchar(50)  NULL
 );
 GO
 
@@ -109,6 +110,7 @@ GO
 -- Creating table 'Restaurants'
 CREATE TABLE [dbo].[Restaurants] (
     [Name] nvarchar(30)  NOT NULL,
+    [Description] nvarchar(max)  NOT NULL,
     [Address_Id] int  NOT NULL
 );
 GO

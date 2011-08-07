@@ -83,12 +83,12 @@ namespace FastFood.Core.Services
 
         public bool AnyNearBy(AddressModel address)
         {
-            return _mainRepo.Any(r => r.Address.PostalCode == address.PostalCode);
+            return _mainRepo.Any(r => r.Address.DependentLocalityName == address.DependentLocalityName);
         }
 
         public IEnumerable<RestaurantModel> NearBy(AddressModel address)
         {
-            IList<Restaurant> restaurants = _mainRepo.GetAll(r => r.Address.PostalCode == address.PostalCode);
+            IList<Restaurant> restaurants = _mainRepo.GetAll(r => r.Address.DependentLocalityName == address.DependentLocalityName);
 
             return restaurants.ToModels<Restaurant, RestaurantModel>();
         }

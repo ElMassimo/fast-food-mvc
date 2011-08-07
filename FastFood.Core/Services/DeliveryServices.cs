@@ -12,6 +12,7 @@ namespace FastFood.Core.Services
     {
         bool IsDeliveryBoy(string nick);
         DeliveryBoyModel GetDeliveryBoy(string nick);
+        IList<DeliveryBoyModel> GetAllByRestaurant(string restaurantName);
     }
 
     public class DeliveryServices : BaseServices<DeliveryBoy, DeliveryBoyModel>, IDeliveryServices
@@ -78,6 +79,11 @@ namespace FastFood.Core.Services
             return deliveryBoy.ToModel<DeliveryBoy,DeliveryBoyModel>();
         }
 
+        public IList<DeliveryBoyModel> GetAllByRestaurant(string restaurantName)
+        {
+            IEnumerable<DeliveryBoy> deliveryBoys = _mainRepo.GetAll(d => d.Restaurant.Name == restaurantName);
+            return deliveryBoys.ToModels<DeliveryBoy, DeliveryBoyModel>();
+        }
         #endregion
     }
 }

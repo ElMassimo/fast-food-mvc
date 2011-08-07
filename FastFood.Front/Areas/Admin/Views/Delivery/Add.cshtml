@@ -1,7 +1,7 @@
 ﻿@model FastFood.Front.Models.RegisterDeliveryBoyModel
 
 @{
-    ViewBag.Title = "Add delivery boy";
+    ViewBag.PageTitle = "Add delivery boy";
 }
 
 <h2>Add delivery boy</h2>
@@ -54,6 +54,7 @@
         </div>
 
         @Html.HiddenFor(model => model.Restaurant.Name)
+        @Html.HiddenFor(model => model.Restaurant.Description)
 
         <p>
             <input type="submit" value="Create" />

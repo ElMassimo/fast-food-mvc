@@ -27,7 +27,9 @@ namespace FastFood.Core.Services
 
         private static void InitializeAddressMapping()
         {
-            Mapper.CreateMap<AddressModel, Address>();
+            Mapper.CreateMap<AddressModel, Address>()
+                .ForMember(a => a.State, o => o.MapFrom(m => m.State ?? m.City))
+                .ForMember(a => a.PostalCode, o => o.MapFrom(m => m.PostalCode ?? 11200));
             Mapper.CreateMap<Address, AddressModel>();
         }
 
