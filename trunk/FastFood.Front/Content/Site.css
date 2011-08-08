@@ -510,7 +510,7 @@ ul#menu li a:hover, .boton-gris:hover, input[type=submit]:hover
     filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFF,EndColorStr=#F0F0F0);    
 }
 
-ul#menu li a:active, .boton-gris:active, input[type=submit]:active
+ul#menu li a:active, .boton-gris:active, input[type=submit]:active, .active
 {
     position:relative;
     top: 1px;
