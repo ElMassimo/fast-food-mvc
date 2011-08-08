@@ -12,6 +12,7 @@
     <AssemblyName>FastFood.Cloud</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>FastFood.Cloud</Name>
+    <FullDeploy>true</FullDeploy>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

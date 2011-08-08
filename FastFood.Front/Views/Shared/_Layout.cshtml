@@ -1,6 +1,13 @@
 ﻿@{
     ViewBag.Title = "Food Express";
-    ViewBag.Subtitle = "Quick relief for really hungry people";
+    if(ViewBag.IsAdmin)
+    {
+        ViewBag.Subtitle = "Quick relief for really hungry people";
+    }
+    else   
+    {
+        ViewBag.Subtitle = "Administrative site";
+    }
 }
 <!DOCTYPE HTML>
 <html>
@@ -21,7 +28,7 @@
     <div class="page">
         <header>            
             <div id="title" class="left-container">            
-                <a href="@Url.Action("Index", "Home")">
+                <a href="@Url.Action("Index", "Home", new { area = ""})">
                     <div class="left-container">
                         <img src="@Url.Content("~/Content/Images/logo.png")" border="0" alt="logo" />      
                     </div>            
@@ -33,13 +40,13 @@
             </div>
             <div id="menucontainer">            
                 <ul id="menu">                                       
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", new { controller = "Home" }, new { id = "home" })</li>
                     @if(!ViewBag.IsAdmin)
                     {       
-                        <li>@Html.ActionLink("My orders", "Index", "Order")</li>
+                        <li>@Html.ActionLink("My orders", "Index", new { controller = "Order" }, new { id = "orders" })</li>
                     }
-                    <li>@Html.ActionLink("Restaurants", "Index", "Restaurant")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Restaurants", "Index", new { controller = "Restaurant" }, new { id = "restaurants" })</li>
+                    <li>@Html.ActionLink("About", "About", new { controller = "Home" }, new { id = "about" })</li>
                 </ul>
             </div>     
         </header>
