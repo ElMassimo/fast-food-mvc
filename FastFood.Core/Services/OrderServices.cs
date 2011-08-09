@@ -44,17 +44,22 @@ namespace FastFood.Core.Services
         #region IOrderServices
 
         public int MakeOrder(OrderModel model, string restaurantName, string clientEmail)
-        {            
+        {
             model.DateOrdered = DateTime.Now;
-            model.Cost = Convert.ToDecimal(Math.Pow(model.Description.Length, 2)*0.37);
+            model.Cost = Convert.ToDecimal(Math.Pow(model.Description.Length, 2) * 0.37);
             model.Status = OrderStatus.Assigned;
             Order order = null;
             order = model.ToEntity(order);
-            
+
+            Client client = _clientRepo.GetSingle(c => c.Email == clientEmail);
+            if (client == null)
+                throw new ArgumentException("The user with email address " + clientEmail + " doesn't exist");
+
             Restaurant restaurant = _restaurantRepo.GetSingle(r => r.Name == restaurantName);
             int minDelivery = restaurant.DeliveryBoys.Min(d => d.SuccesfulDeliveries);
             DeliveryBoy delivery = restaurant.DeliveryBoys.Where(d => d.SuccesfulDeliveries == minDelivery).First();
-            Client client = _clientRepo.GetSingle(c => c.Email == clientEmail);
+            if (delivery == null)
+                throw new ArgumentException("The restaurant does not have any employees that can deliver the order");
 
             order.DeliveryBoy = delivery;
             order.Client = client;
@@ -67,7 +72,7 @@ namespace FastFood.Core.Services
 
         public OrderModel Get(int id)
         {
-            return _mainRepo.GetSingle(o => o.Id == id).ToModel<Order,OrderModel>();
+            return _mainRepo.GetSingle(o => o.Id == id).ToModel<Order, OrderModel>();
         }
 
         public void UpdateStatus(int orderId, OrderStatus status)
