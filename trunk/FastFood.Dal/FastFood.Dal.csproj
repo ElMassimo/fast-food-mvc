@@ -134,6 +134,9 @@
   <ItemGroup>
     <Content Include="EntityModels\Datos.sql" />
     <Content Include="EntityModels\FastFoodEntities.edmx.sql" />
+    <Content Include="EntityModels\InstallCommon.sql" />
+    <Content Include="EntityModels\InstallMembership.sql" />
+    <Content Include="EntityModels\InstallRoles.sql" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
