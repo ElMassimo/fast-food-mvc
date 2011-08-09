@@ -47,10 +47,17 @@ function focusOut() {
     }
 }
 
+function keyPress(e) {
+    if (e.keyCode == 13) {
+        searchButton.click();
+    }
+}
+
 $(document).ready(function () {
     validationSummary = $("#validationSummary");
     searchBox = $("#txtSearchBox");
     searchBox.focus(focusIn).focusout(focusOut);
+    searchBox.keypress(keyPress);
     searchButton = $("#btnSearch").click(validateSearch);
     focusOut();
 });    

@@ -26,7 +26,7 @@ namespace FoodExpress.Phone.Views
         {
             if (orderList.Items.Count == 0)
             {
-                lblSelectOrder.Text = "Congratulations!\nYou have no undelivered orders left...";
+                lblSelectOrder.Text = "Well done!\nYou have no undelivered orders left...";
                 lblSelectOrder.Height = 100;
                 btnNext.Visibility = orderList.Visibility = Visibility.Collapsed;
             }

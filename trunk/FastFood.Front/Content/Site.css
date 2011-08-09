@@ -226,7 +226,7 @@ page width. Or, you can specify an exact pixel width. */
 ----------------------------------------------------------*/
 ul#menu
 {
-    padding: 0 0 2px;
+    padding: 0px;
     position: relative;
     margin: 0;
     text-align: right;
@@ -400,6 +400,11 @@ table th
     margin:0.5em 0 0 0;
 }
 
+.display-label
+{ 
+    font-weight: bold;   
+}
+
 .text-box
 {
     width: 30em;
@@ -514,9 +519,14 @@ ul#menu li a:active, .boton-gris:active, input[type=submit]:active, .active
 {
     position:relative;
     top: 1px;
-    background: -moz-linear-gradient(top, #FFFFFF, #D6D6D6);
-    background-image: -webkit-linear-gradient(#FFFFFF, #D6D6D6); 
-    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFF,EndColorStr=#D6D6D6);    
+    background: -moz-linear-gradient(top, #FFFFFF, #AAAAAA) !important; 
+    background-image: -webkit-linear-gradient(#FFFFFF, #AAAAAA) !important; 
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFF,EndColorStr=#AAAAAA) !important;    
+}
+
+.active
+{
+    top: 2px !important; 
 }
 
 .warning-msg {

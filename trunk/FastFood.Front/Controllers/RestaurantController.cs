@@ -27,7 +27,7 @@ namespace FastFood.Front.Controllers
                 case RestaurantListType.Client:
                 case RestaurantListType.Search:
                     ViewBag.PageTitle = "Restaurants in your area";
-                    ViewBag.NoRestaurants = "There are no restaurants near your area";
+                    ViewBag.NoRestaurants = "Sorry, there are no restaurants near your location";
                     break;
             }
         }
@@ -51,17 +51,17 @@ namespace FastFood.Front.Controllers
 
         public ActionResult Search(AddressModel address)
         {
-            address.DependentLocalityName = GetLocalityName(address.ToString());
-            if(address.DependentLocalityName != null)
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid && restaurantServices.AnyNearBy(address))
+                address.DependentLocalityName = GetLocalityName(address.ToString());
+                if (address.DependentLocalityName != null)
                 {
                     LoadViewBag(RestaurantListType.Search);
-                    return View("Index", restaurantServices.NearBy(address));
+                    return View("Index", restaurantServices.NearBy(address));                    
                 }
-                return View("Message", new MessageModel("Restaurants", "Restaurants near by", "Sorry, there are no restaurants near your location"));
+                return View("Message", new MessageModel("Restaurants", "Restaurants near by", "Sorry, the Google web service we use to obtain your location couldn't process your address"));
             }
-            return View("Message", new MessageModel("Restaurants", "Restaurants near by", "Sorry, the Google web service we use to obtain your location couldn't process your address"));
+            return View("Message", new MessageModel("Restaurants", "Restaurants near by", "Sorry, the address format is incorrect"));
         }
 
         public ActionResult Details(string name)

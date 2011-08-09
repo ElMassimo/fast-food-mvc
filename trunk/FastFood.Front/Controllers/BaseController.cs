@@ -33,7 +33,8 @@ namespace FastFood.Front.Controllers
         {
             string area = filterContext.RouteData.DataTokens["area"] as string;
             ViewBag.IsAdmin = area != null && area.Equals("Admin", StringComparison.OrdinalIgnoreCase);
-            ViewBag.IsAdmin |= filterContext.HttpContext.User.IsInRole("Administrators");
+            ViewBag.IsAdminLogged = filterContext.HttpContext.User.IsInRole("Administrators");
+            ViewBag.IsAdmin |= ViewBag.IsAdminLogged;
             base.OnActionExecuting(filterContext);
         }
     }

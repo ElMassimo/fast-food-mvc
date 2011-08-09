@@ -4,15 +4,16 @@
     ViewBag.PageTitle = Model.Name;
 }
 
-<h2>@Model.Name</h2>
-<h3>@Model.Description</h3>
-
-@Html.DisplayFor(r => r.Address)
+<h2>@Model.Name - @Model.Description</h2>
 
 @if (ViewBag.IsAdmin)
 {
-    @Html.ActionLink("Manage restaurant delivery service", "Employees", new { controller = "Delivery", restaurantName = Model.Name })
+    <p>
+        @Html.ActionLink("Manage restaurant delivery service", "Employees", new { controller = "Delivery", area = "Admin", restaurantName = Model.Name })
+    </p>
 }
+
+@Html.DisplayFor(r => r.Address)
 
 <p>
     @Html.ActionLink("Back to List", "Index")

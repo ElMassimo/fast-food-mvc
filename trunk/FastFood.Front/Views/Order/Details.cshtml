@@ -24,7 +24,7 @@
     }
     
     <div class="display-label">Status</div>
-    <div class="display-field">@Model.Status.ToString()</div>    
+    <div class="display-field" style="font-weight:bold; color: DarkGreen">@Model.Status.ToString()</div>    
 </fieldset>
 <fieldset>
     <legend>Client information</legend>
@@ -32,6 +32,8 @@
     <div class="display-field">@Model.Client.FirstName @Model.Client.LastName</div>
     <div class="display-label">Client e-mail</div>
     <div class="display-field">@Model.Client.Email</div>
+    <div class="display-label">Client address</div>
+    <div class="display-field">@Model.Client.Address.ToString()</div>
 </fieldset>
 <fieldset>
     <legend>Restaurant information</legend>
@@ -41,6 +43,9 @@
 
     <div class="display-label">Restaurant description</div>
     <div class="display-field">@Model.DeliveryBoy.Restaurant.Description</div>
+
+    <div class="display-label">Restaurant address</div>
+    <div class="display-field">@Model.DeliveryBoy.Restaurant.Address.ToString()</div>
 
     <div class="display-label">Delivery boy</div>
     <div class="display-field">@Model.DeliveryBoy.FirstName @Model.DeliveryBoy.LastName</div>

@@ -20,6 +20,7 @@
       <xs:element minOccurs="0" name="DateOrdered" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderDetail" nillable="true" type="tns:OrderDetail" />

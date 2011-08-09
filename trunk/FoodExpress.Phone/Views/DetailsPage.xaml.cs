@@ -20,7 +20,10 @@ namespace FoodExpress.Phone.Views
         public DetailsPage()
         {
             InitializeComponent();
-            lblErrorMessage.Text = String.Empty;
+            comboBoxStatus.ItemsSource = new List<string>(){ "New", "Assigned", "On its way", "Delivered", "Lost" };
+            comboBoxStatus.SelectionChanged += (s, ea) => {
+                btnSend.IsEnabled = comboBoxStatus.SelectedIndex > Orders.Detail.Status && Orders.Detail.Status < 3;
+            };
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -30,23 +33,29 @@ namespace FoodExpress.Phone.Views
                 NavigationService.GoBack();
             else
             {
+                btnSend.IsEnabled = false;
                 Orders.Detail = null;
                 var services = new DeliveryServicesClient();
                 services.GetOrderDetailCompleted += (s, ea) =>
                 {
                     if (!ea.Cancelled)
                         Orders.Detail = ea.Result;
-                    if (Orders.Detail == null)
+                    OrderDetail detail = Orders.Detail;
+                    if (detail == null)
                         NavigationService.GoBack();
                     else
                     {
-                        txtOrderIdentifier.Text = Orders.Detail.Id.ToString();
-                        txtOrderDescription.Text = Orders.Detail.Description;
-                        txtDateOrdered.Text = Orders.Detail.DateOrdered.ToString("dd/MM/yy hh:mm");
-                        txtOrderPrice.Text = Orders.Detail.Cost.ToString("C2");
-                        txtAddress.Text = Orders.Detail.Address;
+                        lblErrorMessage.Text = "Select the order's current status";
+                        PageTitle.Text = String.Format("order {0}", detail.Id);
+                        comboBoxStatus.SelectedIndex = detail.Status;
+                        txtOrderDescription.Text = detail.Description;
+                        txtDateOrdered.Text = detail.DateOrdered.ToString("dd/MM/yy hh:mm");
+                        txtOrderPrice.Text = detail.Cost.ToString("C2");
+                        txtAddress.Text = detail.Address;
                     }
                 };
+                lblErrorMessage.Text = "Loading...";
+                lblErrorMessage.Foreground = new SolidColorBrush(Colors.White);
                 services.GetOrderDetailAsync(Orders.Selected.Id);
             }
         }
@@ -60,23 +69,32 @@ namespace FoodExpress.Phone.Views
         {
             var services = new DeliveryServicesClient();
             services.DeliverOrderCompleted += (s, ea) =>
-            {
+            {                
                 if (ea.Cancelled)
                 {
-                    lblErrorMessage.Text = "Connection error. Please try again later";                    
-                    btnDelivered.Content = "Error!";
+                    lblErrorMessage.Text = "Connection error. Please try again later";
+                    lblErrorMessage.Foreground = new SolidColorBrush(Colors.Red);
+                    comboBoxStatus.IsEnabled = false;
+                    btnSend.Content = "Error!";
                 }
-                else if(!ea.Result)
+                else if (!ea.Result)
                 {
-                    lblErrorMessage.Text = "Error. Incorrect order number or credentials";                    
-                    btnDelivered.Content = "Error!";
+                    lblErrorMessage.Text = "Error. Incorrect order number or credentials";
+                    lblErrorMessage.Foreground = new SolidColorBrush(Colors.Red);
+                    comboBoxStatus.IsEnabled = false;
+                    btnSend.Content = "Error!";
                 }
                 else
-                    btnDelivered.Content = "Delivered!";
+                {
+                    lblErrorMessage.Text = "The order status was succesfully updated";
+                    lblErrorMessage.Foreground = new SolidColorBrush(Colors.White);
+                    btnSend.Content = "OK!";
+                }
             };
-            btnDelivered.Content = "Delivering";
-            btnDelivered.IsEnabled = false;
-            services.DeliverOrderAsync(User.Nick, User.Password, Orders.Selected.Id);
+            btnSend.Content = "Sending";
+            btnSend.IsEnabled = false;
+            Orders.Detail.Status = comboBoxStatus.SelectedIndex;
+            services.DeliverOrderAsync(User.Nick, User.Password, Orders.Selected.Id, comboBoxStatus.SelectedIndex);
         }
     }
 }

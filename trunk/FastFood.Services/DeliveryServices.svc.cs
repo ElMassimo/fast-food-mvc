@@ -35,7 +35,7 @@ namespace FastFood.Services
             IList<OrderHeader> headers = new List<OrderHeader>();
             foreach (OrderModel order in orders)
             {
-                OrderHeader header = new OrderHeader(order.Id, String.Format("Order number: {0}\nAddress: {1}", order.Id, order.Client.Address));
+                OrderHeader header = new OrderHeader(order.Id, String.Format("Description: {0}\nLocation: {1}", order.Description, order.Client.Address.DependentLocalityName));
                 headers.Add(header);
             }
             return headers;
@@ -49,7 +49,8 @@ namespace FastFood.Services
                 return new OrderDetail()
                 {
                     Id = order.Id,
-                    Description = order.Description,
+                    Status = (int)order.Status,
+                    Description =  order.Description,
                     DateOrdered = order.DateOrdered,
                     Cost = order.Cost,
                     Address = order.Client.Address.ToString()
@@ -61,13 +62,13 @@ namespace FastFood.Services
             }
         }
 
-        public bool DeliverOrder(string nick, string password, int orderId)
+        public bool DeliverOrder(string nick, string password, int orderId, int orderStatus)
         {
             if (!security.ValidateUser(nick, password))
                 return false;
             try
             {
-                orderServices.UpdateStatus(orderId, OrderStatus.Delivered);
+                orderServices.UpdateStatus(orderId, (OrderStatus)orderStatus);
                 return true;
             }
             catch

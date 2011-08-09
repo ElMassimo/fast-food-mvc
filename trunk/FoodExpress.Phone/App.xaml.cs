@@ -12,11 +12,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using FoodExpress.Phone.Models;
+using FoodExpress.Phone.FastFoodServices;
+using System.IO.IsolatedStorage;
 
 namespace FoodExpress.Phone
 {
     public partial class App : Application
     {
+        public const string appKey = "FoodExpressGlobals_";
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -62,12 +67,31 @@ namespace FoodExpress.Phone
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            try
+            {                
+                User.Nick = IsolatedStorageSettings.ApplicationSettings[appKey + "UserNick"].ToString();
+                User.Password = IsolatedStorageSettings.ApplicationSettings[appKey + "UserPassword"].ToString();
+                if (IsolatedStorageSettings.ApplicationSettings.Contains(appKey + "OrdersSelectedId"))
+                {
+                    int selectedOrderId = (int)IsolatedStorageSettings.ApplicationSettings[appKey + "OrdersSelectedId"];
+                    string selectedOrderName = IsolatedStorageSettings.ApplicationSettings[appKey + "OrdersSelectedName"].ToString();
+                    Orders.Selected = new OrderHeader() { Id = selectedOrderId, Name = selectedOrderName };
+                }
+            }
+            catch {}
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
-        {
+        {            
+            IsolatedStorageSettings.ApplicationSettings[appKey + "UserNick"] = User.Nick;
+            IsolatedStorageSettings.ApplicationSettings[appKey + "UserPassword"] = User.Password;
+            if (Orders.Selected != null)
+            {
+                IsolatedStorageSettings.ApplicationSettings[appKey + "OrdersSelectedId"] = Orders.Selected.Id;
+                IsolatedStorageSettings.ApplicationSettings[appKey + "OrdersSelectedName"] = Orders.Selected.Name;
+            }
         }
 
         // Code to execute when the application is closing (eg, user hit Back)

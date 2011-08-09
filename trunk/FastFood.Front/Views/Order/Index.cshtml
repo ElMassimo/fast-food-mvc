@@ -13,6 +13,9 @@
             Id
         </th>
         <th>
+            Restaurant
+        </th>
+        <th>
             Description
         </th>
         <th>
@@ -30,6 +33,9 @@
         </td>
         <td>
             @item.Id
+        </td>
+        <td>
+            <a href="@Url.Action("Details", "Restaurant", new{ name = item.DeliveryBoy.Restaurant.Name })" >@item.DeliveryBoy.Restaurant.Name</a>
         </td>
         <td>
             @item.Description

@@ -20,6 +20,13 @@ namespace FastFood.Front
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+            routes.MapRoute(
+                "Restaurant_details", // Route name
+                "Restaurant/Details/{name}", // URL with parameters
+                new { controller = "Restaurant", action = "Details" },
+                new string[] { "FastFood.Front.Controllers" }
+            );
 
             routes.MapRoute(
                 "Default", // Route name

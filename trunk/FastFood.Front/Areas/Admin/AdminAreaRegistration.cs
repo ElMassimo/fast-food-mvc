@@ -21,6 +21,18 @@ namespace FastFood.Front.Areas.Admin
             );
 
             context.MapRoute(
+                "Admin_employees",
+                "Admin/Delivery/Employees/{restaurantName}",
+                new { controller = "Delivery", action = "Employees" }
+            );
+
+            context.MapRoute(
+                "Admin_details", // Route name
+                "Admin/Restaurant/Details/{name}", // URL with parameters
+                new { controller = "Restaurant", action = "Details" }
+            );
+
+            context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -80,7 +80,7 @@ namespace FastFood.Core.Services
 
         public IList<OrderModel> GetUndeliveredOrders(string nick)
         {
-            IEnumerable<Order> orders = _mainRepo.GetAll(o => o.DeliveryBoy.Nick == nick && o.Status == (short)OrderStatus.Assigned);
+            IEnumerable<Order> orders = _mainRepo.GetAll(o => o.DeliveryBoy.Nick == nick && (o.Status == (short)OrderStatus.Assigned || o.Status == (short)OrderStatus.OnItsWay));
             return orders.ToModels<Order, OrderModel>();
         }
 
