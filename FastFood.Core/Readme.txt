@@ -10,9 +10,7 @@ Instrucciones:
 *FoodExpress.admin: Se utiliza para guardar las cuentas de los administradores del sistema.
 Instrucciones:
 	-Crear la base de datos "FoodExpress.admin".
-	-Correr el script "InstallCommon.sql".
-	-Correr el script "InstallMembership.sql".
-	-Correr el script "InstallRoles.sql".
+	-Correr el script "FoodExpressAdminSchema.sql" para crear el esquema (es el que crea por defecto ASP.NET para ApplicationData).
 	-Correr el script "FoodExpressAdminData.sql" para cargar cuentas de prueba.
 
 Hay por defecto dos cuentas administrativas:
@@ -23,3 +21,5 @@ Hay por defecto dos cuentas administrativas:
 	Password: password
 	
 Se accede al sitio administrativo bajo el path ~/Admin.
+
+IMPORTANTE: Si se hace deploy en el IIS, puede ser necesario ir al pool de aplicaciones donde corre la aplicación y dentro de Configuración avanzada->Identidad seleccionar LocalSystem.

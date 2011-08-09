@@ -603,7 +603,7 @@ ul#menu li a:active, .boton-gris:active, input[type=submit]:active, .active
     top: 5px;
 }
 
-.display-field {
+.display-field, .indented {
     position: relative;
     left : 20px; 
 }
