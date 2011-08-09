@@ -20,7 +20,7 @@ namespace FastFood.Services
         OrderDetail GetOrderDetail(int orderId);
 
         [OperationContract]
-        bool DeliverOrder(string nick, string password, int orderId);
+        bool DeliverOrder(string nick, string password, int orderId, int orderStatus);
     }
 
     [DataContract]
@@ -44,6 +44,9 @@ namespace FastFood.Services
     {
         [DataMember]
         public int Id { get; set; }
+
+        [DataMember]
+        public int Status { get; set; }
 
         [DataMember]
         public string Description { get; set; }

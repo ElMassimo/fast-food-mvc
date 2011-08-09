@@ -75,6 +75,8 @@ namespace FoodExpress.Phone.FastFoodServices {
         
         private int IdField;
         
+        private int StatusField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Address {
             get {
@@ -140,6 +142,19 @@ namespace FoodExpress.Phone.FastFoodServices {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -165,7 +180,7 @@ namespace FoodExpress.Phone.FastFoodServices {
         FoodExpress.Phone.FastFoodServices.OrderDetail EndGetOrderDetail(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDeliveryServices/DeliverOrder", ReplyAction="http://tempuri.org/IDeliveryServices/DeliverOrderResponse")]
-        System.IAsyncResult BeginDeliverOrder(string nick, string password, int orderId, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginDeliverOrder(string nick, string password, int orderId, int orderStatus, System.AsyncCallback callback, object asyncState);
         
         bool EndDeliverOrder(System.IAsyncResult result);
     }
@@ -411,8 +426,8 @@ namespace FoodExpress.Phone.FastFoodServices {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult FoodExpress.Phone.FastFoodServices.IDeliveryServices.BeginDeliverOrder(string nick, string password, int orderId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginDeliverOrder(nick, password, orderId, callback, asyncState);
+        System.IAsyncResult FoodExpress.Phone.FastFoodServices.IDeliveryServices.BeginDeliverOrder(string nick, string password, int orderId, int orderStatus, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeliverOrder(nick, password, orderId, orderStatus, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -424,7 +439,8 @@ namespace FoodExpress.Phone.FastFoodServices {
             string nick = ((string)(inValues[0]));
             string password = ((string)(inValues[1]));
             int orderId = ((int)(inValues[2]));
-            return ((FoodExpress.Phone.FastFoodServices.IDeliveryServices)(this)).BeginDeliverOrder(nick, password, orderId, callback, asyncState);
+            int orderStatus = ((int)(inValues[3]));
+            return ((FoodExpress.Phone.FastFoodServices.IDeliveryServices)(this)).BeginDeliverOrder(nick, password, orderId, orderStatus, callback, asyncState);
         }
         
         private object[] OnEndDeliverOrder(System.IAsyncResult result) {
@@ -440,11 +456,11 @@ namespace FoodExpress.Phone.FastFoodServices {
             }
         }
         
-        public void DeliverOrderAsync(string nick, string password, int orderId) {
-            this.DeliverOrderAsync(nick, password, orderId, null);
+        public void DeliverOrderAsync(string nick, string password, int orderId, int orderStatus) {
+            this.DeliverOrderAsync(nick, password, orderId, orderStatus, null);
         }
         
-        public void DeliverOrderAsync(string nick, string password, int orderId, object userState) {
+        public void DeliverOrderAsync(string nick, string password, int orderId, int orderStatus, object userState) {
             if ((this.onBeginDeliverOrderDelegate == null)) {
                 this.onBeginDeliverOrderDelegate = new BeginOperationDelegate(this.OnBeginDeliverOrder);
             }
@@ -457,7 +473,8 @@ namespace FoodExpress.Phone.FastFoodServices {
             base.InvokeAsync(this.onBeginDeliverOrderDelegate, new object[] {
                         nick,
                         password,
-                        orderId}, this.onEndDeliverOrderDelegate, this.onDeliverOrderCompletedDelegate, userState);
+                        orderId,
+                        orderStatus}, this.onEndDeliverOrderDelegate, this.onDeliverOrderCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -563,11 +580,12 @@ namespace FoodExpress.Phone.FastFoodServices {
                 return _result;
             }
             
-            public System.IAsyncResult BeginDeliverOrder(string nick, string password, int orderId, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[3];
+            public System.IAsyncResult BeginDeliverOrder(string nick, string password, int orderId, int orderStatus, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[4];
                 _args[0] = nick;
                 _args[1] = password;
                 _args[2] = orderId;
+                _args[3] = orderStatus;
                 System.IAsyncResult _result = base.BeginInvoke("DeliverOrder", _args, callback, asyncState);
                 return _result;
             }

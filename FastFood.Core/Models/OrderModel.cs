@@ -9,8 +9,9 @@ namespace FastFood.Core.Models
     {
         New = 0,
         Assigned = 1,
-        Delivered = 2,
-        Lost = 3
+        OnItsWay = 2,
+        Delivered = 3,
+        Lost = 4
     }
 
     public class OrderModel

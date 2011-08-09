@@ -1,5 +1,10 @@
 ﻿@if(Request.IsAuthenticated) {
-    <text>Welcome <b>@Context.User.Identity.Name</b>!
+    <text>Welcome 
+    @if(ViewBag.IsAdminLogged)
+    {
+        <text> administrator </text>
+    }    
+    <b>@Context.User.Identity.Name</b>!
     @Html.ActionLink("Sign out", "LogOff", "Account") </text>
 }
 else {

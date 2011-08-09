@@ -25,7 +25,7 @@
             <TextBlock Name="ApplicationTitle" Style="{StaticResource PhoneTextNormalStyle}" Text="FOOD EXPRESS" />
             <Grid Height="94">
                 <Image Height="63" Name="image1" Stretch="Uniform" Width="81" Source="/FoodExpress.Phone;component/logo.png" HorizontalAlignment="Center" Margin="370,0,18,32" />
-                <TextBlock x:Name="PageTitle" Text="details"  Style="{StaticResource PhoneTextTitle1Style}" Margin="0,-16,0,0" />
+                <TextBlock x:Name="PageTitle" Text="order"  Style="{StaticResource PhoneTextTitle1Style}" Margin="0,-16,0,0" />
             </Grid>
         </StackPanel>
 
@@ -40,19 +40,19 @@
                 <RowDefinition Height="126" />
                 <RowDefinition Height="120" />
             </Grid.RowDefinitions>
-            <Button Content="Deliver" FontSize="36" Height="101" HorizontalAlignment="Center"  Name="btnDelivered" Padding="0" VerticalAlignment="Top" Width="200" Grid.Row="6" Margin="250,0,6,0" Click="btnDelivered_Click" IsEnabled="True" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="12,6,0,0" Name="lblIdentifier" Text="Order Id" VerticalAlignment="Top" Grid.Row="1" FontWeight="Bold" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,42,0,0" Name="txtOrderIdentifier" Text="Id" VerticalAlignment="Top" Width="389" Grid.Row="1" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="12,0,0,0" Name="lblStatus" Text="Status" VerticalAlignment="Top" Grid.Row="1" FontWeight="Bold" />
+            <ComboBox Height="41" HorizontalAlignment="Left" Margin="31,31,0,0" Name="comboBoxStatus" VerticalAlignment="Top" Grid.Row="1" Background="Black" Width="347" Foreground="Black"/>
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="12,10,0,0" Name="lblOrderDescription" Text="Description" VerticalAlignment="Top" Grid.Row="2" FontWeight="Bold" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,46,0,0" Name="txtOrderDescription" Text="Description" VerticalAlignment="Top" Width="389" Grid.Row="2" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,46,0,0" Name="txtOrderDescription" Text="-" VerticalAlignment="Top" Width="425" Grid.Row="2" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="12,15,0,0" Name="lblOrderDate" Text="Date Ordered" VerticalAlignment="Top" Grid.Row="3" FontWeight="Bold" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,51,0,0" Name="txtDateOrdered" Text="Date" VerticalAlignment="Top" Width="389" Grid.Row="3" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,51,0,0" Name="txtDateOrdered" Text="-" VerticalAlignment="Top" Width="389" Grid.Row="3" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="12,15,0,0" Name="lblOrderAddress" Text="Client Address" VerticalAlignment="Top" Grid.Row="5" FontWeight="Bold" />
-            <TextBlock Height="89" HorizontalAlignment="Left" Margin="31,51,0,0" Name="txtAddress" Text="Address" VerticalAlignment="Top" Width="425" Grid.Row="5" />
+            <TextBlock Height="75" HorizontalAlignment="Left" Margin="31,51,0,0" Name="txtAddress" Text="-" VerticalAlignment="Top" Width="425" Grid.Row="5" TextWrapping="Wrap" />
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="12,14,0,0" Name="lblOrderPrice" Text="Order Price" VerticalAlignment="Top" Grid.Row="4" FontWeight="Bold" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,50,0,0" Name="txtOrderPrice" Text="Price" VerticalAlignment="Top" Width="389" Grid.Row="4" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,50,0,0" Name="txtOrderPrice" Text="-" VerticalAlignment="Top" Width="389" Grid.Row="4" />
             <Button Content="Go back" FontSize="36" Height="101" HorizontalAlignment="Center" Margin="12,0,244,0" Name="btnBack" Padding="0" VerticalAlignment="Top" Width="200" Grid.Row="6" Click="btnBack_Click" />
-            <TextBlock Height="70" HorizontalAlignment="Left" Name="lblErrorMessage" Text="" VerticalAlignment="Top" Width="456" Foreground="Red" Padding="10" FontSize="28" />
+            <Button Content="Send" FontSize="36" Height="101" HorizontalAlignment="Center" Margin="250,0,6,0" Name="btnSend" Padding="0" VerticalAlignment="Top" Width="200" Grid.Row="6" Click="btnDelivered_Click" />
+            <TextBlock Height="70" HorizontalAlignment="Left" Name="lblErrorMessage" Text="" VerticalAlignment="Top" Width="456" Foreground="Red" Padding="10" FontSize="28" Grid.Row="0" TextWrapping="Wrap" />
         </Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

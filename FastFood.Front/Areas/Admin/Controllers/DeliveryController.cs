@@ -48,9 +48,13 @@ namespace FastFood.Front.Areas.Admin.Controllers
         [AdminAuthorize]
         public ActionResult Employees(string restaurantName)
         {
-            ViewBag.RestaurantName = restaurantName;
-            IList<DeliveryBoyModel> employees = deliveryServices.GetAllByRestaurant(restaurantName);
-            return View(employees);
+            if(restaurantServices.Exists(restaurantName))
+            {
+                ViewBag.RestaurantName = restaurantName;
+                IList<DeliveryBoyModel> employees = deliveryServices.GetAllByRestaurant(restaurantName);
+                return View(employees);
+            }
+            return View("Message", new MessageModel("Restaurant employees", "Sorry...", "The restaurant you are looking for doesn't exist"));
         }
     }
 }

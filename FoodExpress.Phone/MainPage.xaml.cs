@@ -25,7 +25,7 @@ namespace FoodExpress.Phone
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            txtErrorMessage.Text = "Please enter your username and password to log in";
+            txtErrorMessage.Text = "Please enter your username and password";
             txtErrorMessage.Foreground = new SolidColorBrush(Colors.White);
         }
 
@@ -34,24 +34,41 @@ namespace FoodExpress.Phone
         {
             User.Nick = txtNick.Text == null ? null : txtNick.Text.Trim();
             User.Password = txtPassword.Password == null ? null : txtPassword.Password.Trim();
-            
+
             txtErrorMessage.Foreground = new SolidColorBrush(Colors.Red);
 
-            if (String.IsNullOrEmpty(User.Nick) || String.IsNullOrEmpty(User.Password))
+            if (String.IsNullOrEmpty(User.Nick))
             {
-                txtErrorMessage.Text = "Please enter your username and password";
+                txtErrorMessage.Text = "Please enter your username";
+                txtNick.Focus();
                 return;
             }
 
-            if (User.Nick.Length < 3 || User.Password.Length < 6)
+            if(String.IsNullOrEmpty(User.Password))
             {
-                txtErrorMessage.Text = "Username minimum length is 3.\nPassword minimum length is 6";
+                txtErrorMessage.Text = "Please enter your password";
+                txtPassword.Focus();
+                return;
+            }
+
+            if (User.Nick.Length < 3)
+            {
+                txtErrorMessage.Text = "Username minimum length is 3";
+                txtNick.Focus();
+                return;
+            }            
+
+            if(User.Password.Length < 6)
+            {
+                txtErrorMessage.Text = "Password minimum length is 6";
+                txtPassword.Focus();
                 return;
             }
 
             var services = new DeliveryServicesClient();
             services.GetUndeliveredOrdersCompleted += (s, ea) =>
-                {
+            {
+                    txtErrorMessage.Foreground = new SolidColorBrush(Colors.Red);
                     txtErrorMessage.Text = String.Empty;
                     if (ea.Cancelled)
                         txtErrorMessage.Text = "Connection error: Please try again later";
