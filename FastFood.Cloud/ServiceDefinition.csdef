@@ -14,6 +14,8 @@
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
+    <ConfigurationSettings>
+    </ConfigurationSettings>
   </WebRole>
   <WebRole name="FastFood.Services" vmsize="Small">
     <Sites>
