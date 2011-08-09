@@ -526,7 +526,7 @@ ul#menu li a:active, .boton-gris:active, input[type=submit]:active, .active
 
 .active
 {
-    top: 2px !important; 
+    top: 3px !important; 
 }
 
 .warning-msg {

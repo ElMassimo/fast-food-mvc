@@ -36,7 +36,7 @@
             <TextBlock FontSize="28" Height="30" HorizontalAlignment="Left" Margin="25,212,0,0" Name="lblPassword" Text="Password" VerticalAlignment="Top" />
             <PasswordBox Height="72" HorizontalAlignment="Left" Margin="25,248,0,0" Name="txtPassword" VerticalAlignment="Top" Width="412" />
             <Button Content="Login" Height="101" HorizontalAlignment="Center" Margin="128,344,128,0" Name="btnLogin" VerticalAlignment="Top" Width="200" FontSize="36" Padding="0" Click="btnLogin_Click" />
-            <TextBlock Height="88" HorizontalAlignment="Left" Name="txtErrorMessage" Text="" VerticalAlignment="Top" Width="444" Margin="6,0,0,0" Padding="20" Foreground="Red" TextAlignment="Left" FontSize="24" TextWrapping="Wrap" />
+            <TextBlock Height="88" HorizontalAlignment="Left" Name="txtErrorMessage" Text="" VerticalAlignment="Top" Width="450" Padding="0,20" Foreground="Red" TextAlignment="Center" FontSize="24" TextWrapping="Wrap" />
         </Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

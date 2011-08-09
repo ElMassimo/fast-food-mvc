@@ -52,7 +52,7 @@
             <TextBlock Height="30" HorizontalAlignment="Left" Margin="31,50,0,0" Name="txtOrderPrice" Text="-" VerticalAlignment="Top" Width="389" Grid.Row="4" />
             <Button Content="Go back" FontSize="36" Height="101" HorizontalAlignment="Center" Margin="12,0,244,0" Name="btnBack" Padding="0" VerticalAlignment="Top" Width="200" Grid.Row="6" Click="btnBack_Click" />
             <Button Content="Send" FontSize="36" Height="101" HorizontalAlignment="Center" Margin="250,0,6,0" Name="btnSend" Padding="0" VerticalAlignment="Top" Width="200" Grid.Row="6" Click="btnDelivered_Click" />
-            <TextBlock Height="70" HorizontalAlignment="Left" Name="lblErrorMessage" Text="" VerticalAlignment="Top" Width="456" Foreground="Red" Padding="10" FontSize="28" Grid.Row="0" TextWrapping="Wrap" />
+            <TextBlock Height="70" HorizontalAlignment="Left" Name="lblErrorMessage" Text="" VerticalAlignment="Top" Width="467" Foreground="Red" Padding="10" FontSize="28" TextWrapping="Wrap" />
         </Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

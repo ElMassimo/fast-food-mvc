@@ -86,7 +86,7 @@ namespace FoodExpress.Phone.Views
                 }
                 else
                 {
-                    lblErrorMessage.Text = "The order status was succesfully updated";
+                    lblErrorMessage.Text = "The status was succesfully updated";
                     lblErrorMessage.Foreground = new SolidColorBrush(Colors.White);
                     btnSend.Content = "OK!";
                 }

@@ -79,7 +79,11 @@ namespace FastFood.Core.Services
         {
             Order order = _mainRepo.GetSingle(o => o.Id == orderId);
             order.Status = (short)status;
-            order.DeliveryBoy.SuccesfulDeliveries++;
+            if (status == OrderStatus.Delivered)
+            {
+                order.DeliveryBoy.SuccesfulDeliveries++;
+                order.DateDelivered = DateTime.Now;
+            }
             _mainRepo.Save();
         }
 

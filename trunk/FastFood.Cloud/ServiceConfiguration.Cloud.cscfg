@@ -3,13 +3,15 @@
   <Role name="FastFood.Front">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString"
+               value="DefaultEndpointsProtocol=http;AccountName=foodexpress;AccountKey=WM1Kn3T+DUaJ38QuHwIL96RP7WZjUuDr8hFYab+ezJqTQsfcFyg5rpo1GjRAl1rjnm6GxjX9BqJl8eHTkYw9cw==" />      
     </ConfigurationSettings>
   </Role>
   <Role name="FastFood.Services">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString"
+               value="DefaultEndpointsProtocol=http;AccountName=foodexpress;AccountKey=WM1Kn3T+DUaJ38QuHwIL96RP7WZjUuDr8hFYab+ezJqTQsfcFyg5rpo1GjRAl1rjnm6GxjX9BqJl8eHTkYw9cw==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>
