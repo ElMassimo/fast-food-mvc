@@ -1,7 +1,7 @@
-Para poder correr la aplicaci髇 localmente es necesario crear dos bases de datos.
+Para poder correr la aplicaci贸n localmente es necesario crear dos bases de datos.
 En FastFood.Dal/EntityModels se encuentran scripts para crear los esquemas y para cargar datos de prueba en dichas bases.
 	
-*FoodExpress: Se utiliza para almacenar la mayor parte de la informaci髇 de la aplicaci髇.
+*FoodExpress: Se utiliza para almacenar la mayor parte de la informaci贸n de la aplicaci贸n.
 Instrucciones: 
 	-Crear la base de datos "FoodExpress".
 	-Correr el script "FastFoodEntities.edmx.sql" para crear el esquema.
@@ -13,13 +13,8 @@ Instrucciones:
 	-Correr el script "FoodExpressAdminSchema.sql" para crear el esquema (es el que crea por defecto ASP.NET para ApplicationData).
 	-Correr el script "FoodExpressAdminData.sql" para cargar cuentas de prueba.
 
-Hay por defecto dos cuentas administrativas:
-	User: pcgarcia@microsoft.com
-	Password: password
-	
-	User: t-gakles@microsoft.com
-	Password: password
+Hay por defecto dos cuentas administrativas.
 	
 Se accede al sitio administrativo bajo el path ~/Admin.
 
-IMPORTANTE: Si se hace deploy en el IIS, puede ser necesario ir al pool de aplicaciones donde corre la aplicaci髇 y dentro de Configuraci髇 avanzada->Identidad seleccionar LocalSystem.
+IMPORTANTE: Si se hace deploy en el IIS, puede ser necesario ir al pool de aplicaciones donde corre la aplicaci贸n y dentro de Configuraci贸n avanzada->Identidad seleccionar LocalSystem.
